@@ -54,11 +54,6 @@ Atente-se aos seguintes pontos:
 * Conceitos Clean Code
 * Jetpack
 * Utilizar GITFLOW
-* 
-* ref: `https://developer.android.com/topic/libraries/architecture`
-
-### Opcionais:
-#### Não necessário, porém contam pontos.
 * Desenvolver o App seguindo a Clean Architecture;
 * Desenvolver testes unitários e/ou funcionais;
 * Botão de favoritar/desfavoritar nos itens das listas;
@@ -66,6 +61,7 @@ Atente-se aos seguintes pontos:
 * Paginação na tela principal;
 * Opções de filtro e ordenação nas listas;
 * Pipeline automatizado.
+ref: `https://developer.android.com/topic/libraries/architecture`
 
 ## Processo de submissão
 Para submeter o seu desafio, faça um fork deste projeto, desenvolva o desafio **no seu fork** abrindo um pull request até a data limite estabelecida.
