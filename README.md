@@ -32,7 +32,31 @@ Atente-se aos seguintes pontos:
 	* Nota do filme;
 	* E os gêneros por extenso.
 * É necessário fazer tratamento de erros e dos fluxos de exceção, como: busca vazia, loading e outros erros que possam ocorrer.
-  
+
+### **Serão observados** ##
+
+* Padrão arquitetural (Sugestão: MVVM)
+* Modularização
+* Material Design
+* Framework para comunicação com API e chamadas assíncronas
+* Testes
+* Libraries do Jetpack
+* Guidelines desenvolvimento Android
+* Injeção de dependências
+
+### **Sugestões** ###
+
+* Retrofit | Volley 
+* Picasso | Universal Image Loader | Glide
+* Espresso | Robotium | Robolectric | Junit
+* RXJava | Coroutines
+* Live Data
+* Conceitos Clean Code
+* Jetpack
+* Utilizar GITFLOW
+* 
+* ref: `https://developer.android.com/topic/libraries/architecture`
+
 ### Opcionais:
 #### Não necessário, porém contam pontos.
 * Desenvolver o App seguindo a Clean Architecture;
