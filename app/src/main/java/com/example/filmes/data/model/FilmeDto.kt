@@ -1,7 +1,10 @@
 package com.example.filmes.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class FilmeDto(
 
     @SerializedName("poster_path")
@@ -45,4 +48,4 @@ class FilmeDto(
 
     @SerializedName("vote_count")
     val voteCount: Int
-)
+):Parcelable

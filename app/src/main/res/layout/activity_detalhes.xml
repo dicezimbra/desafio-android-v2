@@ -14,9 +14,12 @@
         android:background="@color/white"
         android:elevation="4dp"
         android:orientation="vertical"
-        app:title="Pacote" />
+        app:title="Pacote"
+        app:titleTextColor="@color/white"
+        android:backgroundTint="?attr/colorPrimary"/>
 
         <ScrollView
+            android:layout_below="@id/toolbarDetalhes"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -24,20 +27,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <ImageView
-                    android:id="@+id/ImagemFilmeDetalhes"
+                    android:id="@+id/imagemFilmeDetalhes"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"/>
 
                 <TextView
                     android:id="@+id/textViewNomeDetalhes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ImagemFilmeDetalhes"
+                    android:layout_below="@id/imagemFilmeDetalhes"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Nome do Pacote"
                     android:textSize="18sp"
