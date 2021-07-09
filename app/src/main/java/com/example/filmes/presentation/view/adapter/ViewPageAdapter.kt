@@ -16,10 +16,10 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> {
-                FavoritoFragment()
+                PopularFragment()
             }
             else ->{
-                PopularFragment()
+                FavoritoFragment()
             }
         }
     }

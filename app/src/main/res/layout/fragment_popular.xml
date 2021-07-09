@@ -6,12 +6,6 @@
     tools:context=".presentation.view.PopularFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Populares"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPopulares"
         android:layout_width="match_parent"
