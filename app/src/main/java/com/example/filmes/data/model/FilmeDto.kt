@@ -2,7 +2,7 @@ package com.example.filmes.data.model
 
 import com.google.gson.annotations.SerializedName
 
-class Filme(
+class FilmeDto(
 
     @SerializedName("poster_path")
     val posterFilme: String,

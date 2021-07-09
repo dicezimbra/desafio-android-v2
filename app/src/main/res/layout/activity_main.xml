@@ -29,4 +29,11 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        style="@style/Widget.AppCompat.ProgressBar"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
