@@ -3,6 +3,7 @@ package com.example.filmes.data.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import java.lang.reflect.Array
 
 @Parcelize
 class FilmeDto(
@@ -23,7 +24,7 @@ class FilmeDto(
     val dataLancamento: String,
 
     @SerializedName("genre_ids")
-    val generosIds: List<Int>,
+    val generosIds: IntArray,
 
     @SerializedName("adult")
     var adult: Boolean,

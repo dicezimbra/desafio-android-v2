@@ -23,7 +23,11 @@ class DetalhesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalhes)
 
         initView()
-        floatingSalvar.setOnClickListener { salvarListFavorito(listFilmesSalvo) }
+        floatingSalvar.setOnClickListener {
+            val filme = FilmeDto("","","",1.11,"", intArrayOf(1,1),false,"",1,"","",1.11,false,1)
+            listFilmesSalvo.add(filme)
+            salvarListFavorito(listFilmesSalvo)
+        }
     }
 
     private fun initView() {
@@ -42,6 +46,7 @@ class DetalhesActivity : AppCompatActivity() {
     private fun initPreferences() {
         preferencesConfig = SharedPreferecesConfig(sharedInstance())
         listFilmesSalvo = preferencesConfig.getListaSalva()
+        if(listFilmesSalvo.size > 0) mostrarToast(listFilmesSalvo[0].tituloFilme)
     }
 
     private fun sharedInstance() : SharedPreferences{
@@ -51,9 +56,14 @@ class DetalhesActivity : AppCompatActivity() {
     private fun salvarListFavorito(listSalvo: ArrayList<FilmeDto>) {
         if(listSalvo.isNotEmpty()){
             preferencesConfig.setShared(listSalvo)
+            mostrarToast("Cadastrado com sucesso!!!")
         }else{
-            Toast.makeText(this, "Lista vazia", Toast.LENGTH_SHORT).show()
+            mostrarToast("Lista vazia")
         }
+    }
+
+    private fun mostrarToast(toast: String) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
