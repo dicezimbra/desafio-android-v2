@@ -10,7 +10,7 @@
         android:id="@+id/recyclerViewFavoritos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/filme_item"
+        tools:listitem="@layout/popular_item"
         android:padding="16dp"
         android:layout_alignParentTop="true"/>
 

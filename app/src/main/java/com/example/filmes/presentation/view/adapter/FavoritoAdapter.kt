@@ -8,16 +8,16 @@ import com.bumptech.glide.Glide
 import com.example.filmes.R
 import com.example.filmes.data.api.FilmeRetrofitTask
 import com.example.filmes.data.model.FilmeDto
+import kotlinx.android.synthetic.main.favorito_item.view.*
 import kotlinx.android.synthetic.main.popular_item.view.*
-import kotlin.collections.ArrayList
 
-class PopularAdapter(
+class FavoritoAdapter(
     var listener: OnItemClickFilmeListener,
     var listFilmes: ArrayList<FilmeDto>
-) : RecyclerView.Adapter<PopularAdapter.viewHolder>() {
+) : RecyclerView.Adapter<FavoritoAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.popular_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.favorito_item, parent, false)
         return viewHolder(view, listener)
     }
 
@@ -25,17 +25,16 @@ class PopularAdapter(
         var filme = listFilmes[position]
         with(holder.itemView){
             var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.backdropPath
-            Glide.with(this).load(urlImagem).into(imagemFilme)
-            textViewNomeFilme.text = filme!!.tituloFilme
-            textViewAnoLancamento.text = "Data de Lançamento: ${filme.dataLancamento}"
+            Glide.with(this).load(urlImagem).into(imagemFavorito)
+            textViewNomeFavorito.text = filme.tituloFilme
+            textViewAnoLancamentoFavorito.text = filme.dataLancamento
+            textViewDescricaoFavorito.text = filme.sinopse
         }
     }
 
     override fun getItemCount(): Int = listFilmes.size
 
-    class viewHolder(
-        itemView: View, listener: OnItemClickFilmeListener
-    ) : RecyclerView.ViewHolder(itemView){
+    class viewHolder(itemView: View, listener: OnItemClickFilmeListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener { listener.onClick(adapterPosition) }
         }

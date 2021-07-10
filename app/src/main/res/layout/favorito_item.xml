@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="160dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewFavorito"
+        android:layout_width="130dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/imagemFavorito"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textViewNomeFavorito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/cardViewFavorito"
+        android:text="Titulo do Filme"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewAnoLancamentoFavorito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewNomeFavorito"
+        android:layout_marginVertical="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/cardViewFavorito"
+        android:singleLine="true"
+        android:text="Data de Lançamento"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/textViewDescricaoFavorito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAnoLancamentoFavorito"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/cardViewFavorito"
+        android:maxLines="3"
+        android:text="Harry Potter and the Philosopher's Stone Esta é a primeira adaptação da série de best-sellers de Harry Potter, sobre um órfão que descobre que os seus pais eram feiticeiros e que ele também possui poderes mágicos. Harry Potter passou a maior parte do seu tempo debaixo da escada na casa dos Dursleys, seus tios que não gostam dele. Porém, quando é convidado para estudar na Escola de Feitiços e Magia Hogwart, Harry percebe que existem dois mundos: um é o mundo sem graça dos humanos comuns e o outro é cheio de magia, encanto e fantasia."
+        android:textSize="14dp" />
+
+    <Button
+        android:id="@+id/linearFavorito"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewDescricaoFavorito"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@+id/cardViewFavorito"
+        android:text="Favorito"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+</RelativeLayout>
