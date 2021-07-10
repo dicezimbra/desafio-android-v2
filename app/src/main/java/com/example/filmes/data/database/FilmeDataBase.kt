@@ -6,6 +6,6 @@ interface FilmeDataBase {
 
     suspend fun getAllPopulare() : ResultadoFilmeDto?
 
-//    fun getPesquisarFilme() : ResultadoFilmeDto
+    suspend fun getPesquisarFilme(nomeFilme:String) : ResultadoFilmeDto?
 
 }

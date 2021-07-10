@@ -15,7 +15,7 @@ interface FilmeApi {
         @Query("language") idioma:String
     ) : Response<ResultadoFilmeDto>
 
-    @GET("movie/popular")
+    @GET("search/movie")
     suspend fun getPesquisarNomeFilme(
         @Query("api_key") chaveApi:String,
         @Query("language") idioma:String,

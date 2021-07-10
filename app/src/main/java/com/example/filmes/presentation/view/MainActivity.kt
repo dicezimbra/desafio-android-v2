@@ -7,21 +7,31 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.R
+import com.example.filmes.data.FilmeRepository
+import com.example.filmes.data.api.FilmeRetrofitTask
 import com.example.filmes.presentation.view.adapter.ViewPageAdapter
+import com.example.filmes.presentation.viewModel.FilmeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var progressBarHome:ProgressBar
+    lateinit var filmeViewModel:FilmeViewModel
+    var repository = FilmeRepository(FilmeRetrofitTask())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        progressBarHome = findViewById(R.id.progressBarHome)
+        initView()
+    }
 
+    private fun initView() {
+        filmeViewModel = ViewModelProvider(this, FilmeViewModel.ViewModelFactory(repository))
+            .get(FilmeViewModel::class.java)
         setSupportActionBar(toolbarFilme)
         tabLayoutFilme.tabSelectedIndicator
         var pageAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
@@ -50,7 +60,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                mostrarToast(newText+"")
+//                mostrarToast(newText+"")
+                filmeViewModel.getPesquisarFilmes(newText+"")
                 return true
             }
         })

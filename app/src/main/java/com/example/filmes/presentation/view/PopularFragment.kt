@@ -56,9 +56,11 @@ class PopularFragment : Fragment() , OnItemClickFilmesListener{
     }
 
     override fun onClick(posicao: Int) {
-        var intent = Intent(activity, DetalhesActivity::class.java)
-        intent.putExtra(R.string.KEY_FILME.toString(), listFilme[posicao])
-        startActivity(intent)
+        filmeViewModel.getPesquisarFilmes(listFilme[posicao].tituloFilme)
+
+//        var intent = Intent(activity, DetalhesActivity::class.java)
+//        intent.putExtra(R.string.KEY_FILME.toString(), listFilme[posicao])
+//        startActivity(intent)
     }
 
 }

@@ -26,4 +26,17 @@ class FilmeRepository(val retrofitTask: FilmeRetrofitTask) : FilmeDataBase {
 
     }
 
+    override suspend fun getPesquisarFilme(nomeFilme:String): ResultadoFilmeDto? {
+        return withContext(Dispatchers.Default){
+            var response = retrofitTask.getRetrofitTask().getPesquisarNomeFilme(
+                retrofitTask.chaveApi, retrofitTask.linguagem, nomeFilme)
+
+            if(response.isSuccessful){
+                response.body()
+            }else{
+                null
+            }
+        }
+    }
+
 }
