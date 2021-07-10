@@ -13,7 +13,7 @@
             android:id="@+id/toolbarFilme"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?colorPrimary"
+            android:background="@color/primaryColor"
             app:title="Filmes"
             app:titleTextColor="@color/white"/>
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.DetalhesActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".presentation.view.DetalhesActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -18,69 +18,88 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingSalvar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imagemFilmeDetalhes"
+                android:layout_below="@+id/cardViewImagem"
+                android:layout_alignBottom="@+id/cardViewImagem"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="-21dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginBottom="-36dp"
+                android:backgroundTint="@color/corCinza"
                 android:src="@drawable/ic_baseline_favorite_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:backgroundTint="@color/corCinza"
-                android:id="@+id/floatingSalvar"/>
+                app:backgroundTint="@color/corCinza"/>
 
-            <ImageView
-                android:id="@+id/imagemFilmeDetalhes"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewImagem"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="centerCrop" />
+                android:layout_height="350dp"
+                app:cardCornerRadius="0dp">
+
+                <ImageView
+                    android:id="@+id/imagemFilmeDetalhes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_imagem" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/textViewNomeDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imagemFilmeDetalhes"
+                android:layout_below="@id/cardViewImagem"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Nome do Pacote"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewGeneroDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewNomeDetalhes"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@id/textViewNotaDetalhes"
                 android:text="Gêneros"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:typeface="monospace"
-                android:textColor="@color/white"/>
+                android:typeface="monospace" />
 
             <TextView
                 android:id="@+id/textViewNotaDetalhes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewNomeDetalhes"
+                android:layout_alignParentRight="true"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="Nota"
-                android:layout_alignParentRight="true"
-                android:textSize="16sp"
                 android:gravity="center_horizontal"
-                android:typeface="monospace"
-                android:textColor="@color/white"/>
+                android:text="Nota"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:typeface="monospace" />
 
             <TextView
                 android:id="@+id/textViewDescricaoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewNotaDetalhes"
-                android:layout_marginHorizontal="16dp"
+                android:layout_below="@+id/textViewGeneroDetalhes"
+                android:layout_margin="16dp"
                 android:text="Descrição"
-                android:textSize="14sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </RelativeLayout>
     </ScrollView>
 

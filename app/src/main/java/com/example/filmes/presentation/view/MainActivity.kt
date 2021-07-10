@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                mostrarToast(newText+"")
                 filmeViewModel.getPesquisarFilmes(newText+"")
                 return true
             }
@@ -68,6 +67,4 @@ class MainActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
-
-    fun mostrarToast(toast: String) = Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
 }

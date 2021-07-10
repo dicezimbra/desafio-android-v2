@@ -20,14 +20,14 @@ class FilmeViewModel(filmeRepository: FilmeRepository) : ViewModel() {
 
     private val TAG = "FilmeViewModel"
     var mutableAllFilmes = MutableLiveData<ArrayList<FilmeDto>>()
-    var mutablePesquisarFilmes = MutableLiveData<ArrayList<FilmeDto>>()
 
-    var liveDataListFilmes: LiveData<ArrayList<FilmeDto>> = mutableAllFilmes
+    val liveDataListFilmes: LiveData<ArrayList<FilmeDto>>
+        get() = mutableAllFilmes
 
     fun getAllFilmes(){
         CoroutineScope(Dispatchers.Main).launch {
             var listFilmes = withContext(Dispatchers.Default) {
-                 filmesUseCase.invoke()!!.listFilmeDtos
+                 filmesUseCase.invoke()?.listFilmeDtos
             }
             mutableAllFilmes.value = listFilmes
         }

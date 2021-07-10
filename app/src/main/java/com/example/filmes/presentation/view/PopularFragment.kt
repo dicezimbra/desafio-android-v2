@@ -46,6 +46,8 @@ class PopularFragment : Fragment() , OnItemClickFilmesListener{
             if(filmes != null){
                 this.listFilme = filmes
                 atualizarAdapterPopular(listFilme)
+            }else{
+                mostrarToast("É erro de conexão com a rede")
             }
     })}
 
@@ -56,11 +58,13 @@ class PopularFragment : Fragment() , OnItemClickFilmesListener{
     }
 
     override fun onClick(posicao: Int) {
-        filmeViewModel.getPesquisarFilmes(listFilme[posicao].tituloFilme)
+//        filmeViewModel.getPesquisarFilmes(listFilme[posicao].tituloFilme)
 
-//        var intent = Intent(activity, DetalhesActivity::class.java)
-//        intent.putExtra(R.string.KEY_FILME.toString(), listFilme[posicao])
-//        startActivity(intent)
+        var intent = Intent(activity, DetalhesActivity::class.java)
+        intent.putExtra(R.string.KEY_FILME.toString(), listFilme[posicao])
+        startActivity(intent)
     }
+
+    fun mostrarToast(toast: String) = Toast.makeText(activity, toast, Toast.LENGTH_SHORT).show()
 
 }
