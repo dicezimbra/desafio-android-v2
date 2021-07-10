@@ -14,12 +14,12 @@ import com.example.filmes.R
 import com.example.filmes.data.FilmeRepository
 import com.example.filmes.data.api.FilmeRetrofitTask
 import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.presentation.view.adapter.OnItemClickFilmeListener
 import com.example.filmes.presentation.viewModel.FilmeViewModel
-import com.example.filmes.presentation.view.adapter.OnItemClickFilmesListener
 import com.example.filmes.presentation.view.adapter.PopularAdapter
 import kotlinx.android.synthetic.main.fragment_popular.*
 
-class PopularFragment : Fragment() , OnItemClickFilmesListener{
+class PopularFragment : Fragment() , OnItemClickFilmeListener{
 
     private val TAG = "PopularFragment"
     lateinit var filmeViewModel: FilmeViewModel
