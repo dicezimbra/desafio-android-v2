@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.view.PopularFragment"
-    android:orientation="vertical"
     android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,8 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="20dp"
-        android:text="Nenhum filme Salvo"
+        android:textSize="20sp"
+        android:text="@string/nenhum_filme"
         android:textColor="@color/white"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_centerInParent="true"

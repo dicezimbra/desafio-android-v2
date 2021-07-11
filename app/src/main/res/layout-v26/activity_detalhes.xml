@@ -27,9 +27,7 @@
                 android:layout_marginBottom="-30dp"
                 android:src="@drawable/nao_favorito"
                 app:backgroundTint="?attr/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:backgroundTint="@color/lightColor"
-                android:foregroundTint="@color/lightColor"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewImagem"
@@ -59,7 +57,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_toStartOf="@id/floatingSalvar"
-                android:text="@string/titulo_filme"
+                android:text="Nome do Pacote"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -75,7 +73,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_toStartOf="@id/textViewNotaDetalhes"
-                android:text="@string/data_lancamento"
+                android:text="Data"
                 android:gravity="center_vertical"
                 android:textColor="@color/corCinza"
                 android:textSize="14sp"
@@ -88,7 +86,7 @@
                 android:layout_below="@+id/textViewNotaDetalhes"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/generos"
+                android:text="Gêneros Gêneros Gêneros Gêneros"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
 
@@ -97,11 +95,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewNomeDetalhes"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_horizontal"
-                android:text="@string/nota"
+                android:text="Nota"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:typeface="monospace" />
@@ -113,7 +111,7 @@
                 android:layout_below="@+id/textViewGeneroDetalhes"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:text="@string/descricao"
+                android:text="Descrição"
                 android:textColor="@color/corCinza"
                 android:textSize="16sp"
                 android:typeface="serif"

@@ -33,9 +33,9 @@
             android:paddingHorizontal="16dp"
             android:paddingTop="4dp"
             android:singleLine="true"
-            android:text="Nome do Filme"
+            android:text="@string/titulo_filme"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewAnoLancamento" />
 
@@ -44,12 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroundOpacidade50"
-            android:paddingBottom="8dp"
+            android:paddingStart="16sp"
             android:paddingTop="4dp"
-            android:paddingStart="16dp"
-            android:text="Ano de Lançamento"
+            android:paddingBottom="8dp"
+            android:text="@string/data_lancamento"
             android:textColor="@color/white"
-            android:textSize="14dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imagemFilme" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

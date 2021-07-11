@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="170dp"
+    android:layout_marginBottom="8dp"
+    android:paddingRight="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewFavorito"
@@ -23,12 +25,11 @@
         android:id="@+id/textViewNomeFavorito"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
         android:layout_toEndOf="@+id/cardViewFavorito"
-        android:text="Titulo do Filme"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:text="@string/titulo_filme"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewAnoLancamentoFavorito"
@@ -36,12 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewNomeFavorito"
         android:layout_marginVertical="4dp"
-        android:layout_marginRight="8dp"
         android:layout_toEndOf="@+id/cardViewFavorito"
         android:singleLine="true"
-        android:text="Data de Lançamento"
-        android:textSize="12dp"
-        android:textColor="@color/white"/>
+        android:text="@string/data_lancamento"
+        android:textColor="@color/corCinza"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/textViewDescricaoFavorito"
@@ -49,28 +49,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewAnoLancamentoFavorito"
         android:layout_marginTop="4dp"
-        android:layout_marginRight="8dp"
         android:layout_toEndOf="@+id/cardViewFavorito"
         android:maxLines="3"
-        android:text="Harry Potter and the Philosopher's Stone Esta é a primeira adaptação da série de best-sellers de Harry Potter, sobre um órfão que descobre que os seus pais eram feiticeiros e que ele também possui poderes mágicos. Harry Potter passou a maior parte do seu tempo debaixo da escada na casa dos Dursleys, seus tios que não gostam dele. Porém, quando é convidado para estudar na Escola de Feitiços e Magia Hogwart, Harry percebe que existem dois mundos: um é o mundo sem graça dos humanos comuns e o outro é cheio de magia, encanto e fantasia."
-        android:textSize="14dp"
-        android:textColor="@color/white"/>
+        android:text="@string/descricao"
+        android:textColor="@color/corCinza"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/buttonFavorito"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textViewDescricaoFavorito"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/cardViewFavorito"
-        android:text="Desfavoritar"
+        android:text="@string/desfavoritar"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16dp"
-        android:foregroundTint="@color/white"
-        android:textStyle="bold"/>
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

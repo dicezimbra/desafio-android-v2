@@ -11,6 +11,8 @@
     <color name="backgroundOpacidade50">#80000000</color>
     <color name="corCinza">#d3d3d3</color>
     <color name="background">#282037</color>
-    <color name="primaryColor">#673AB7</color>
+    <color name="primaryColor">#360b44</color>
+    <color name="lightColor">#623570</color>
+    <color name="darkColor">#17001e</color>
     <color name="secondaryColor">#1C1625</color>
 </resources>

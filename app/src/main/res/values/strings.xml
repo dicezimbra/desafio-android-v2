@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Filmes</string>
+    <string name="titulo_filme">Título do Filme</string>
+    <string name="data_lancamento">Data de Lançamento</string>
+    <string name="desfavoritar">Desfavoritar</string>
+    <string name="descricao">Descrição</string>
+
+    <!--    Keys-->
     <string name="KEY_FILME">filme</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="nota">Nota</string>
+    <string name="generos">Gêneros</string>
+    <string name="nenhum_filme_salvo">Nenhum filme Salvo</string>
+    <string name="nenhum_filme">Nenhum Filme</string>
 </resources>

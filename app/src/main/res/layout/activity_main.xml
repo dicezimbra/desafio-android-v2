@@ -14,15 +14,19 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primaryColor"
-            app:title="Filmes"
-            app:titleTextColor="@color/white"/>
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white"
+            android:elevation="10dp"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutFilme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            app:tabMode="fixed"/>
+            android:background="@color/primaryColor"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/corCinza"
+            app:tabSelectedTextColor="@color/teal_700"
+            app:tabIndicatorColor="@color/teal_700"/>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPageFilme"
