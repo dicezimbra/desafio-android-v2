@@ -9,10 +9,11 @@ import com.example.filmes.R
 import com.example.filmes.data.api.FilmeRetrofitTask
 import com.example.filmes.data.model.FilmeDto
 import kotlinx.android.synthetic.main.popular_item.view.*
+import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
 
 class PopularAdapter(
-    var listener: OnItemClickFilmeListener,
+    var listener: OnItemClickPopularListener,
     var listFilmes: ArrayList<FilmeDto>
 ) : RecyclerView.Adapter<PopularAdapter.viewHolder>() {
 
@@ -26,19 +27,24 @@ class PopularAdapter(
         with(holder.itemView){
             var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.backdropPath
             Glide.with(this).load(urlImagem).into(imagemFilme)
-            textViewNomeFilme.text = filme!!.tituloFilme
-            textViewAnoLancamento.text = "Data de Lançamento: ${filme.dataLancamento}"
+
+            val formatoData = SimpleDateFormat("dd/MM/yyyy")
+            val dataLancamento = formatoData.format(filme.dataLancamento)
+
+            textViewAnoLancamento.text = "Lançamento: $dataLancamento"
+            textViewNomeFilme.text = filme.tituloFilme
         }
     }
 
     override fun getItemCount(): Int = listFilmes.size
 
-    class viewHolder(
-        itemView: View, listener: OnItemClickFilmeListener
-    ) : RecyclerView.ViewHolder(itemView){
+    class viewHolder(itemView: View, listener: OnItemClickPopularListener): RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener { listener.onClick(adapterPosition) }
         }
     }
 
+}
+interface OnItemClickPopularListener {
+    fun onClick(posicao : Int)
 }

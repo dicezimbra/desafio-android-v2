@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.lang.reflect.Array
+import java.util.*
 
 @Parcelize
 class FilmeDto(
@@ -21,7 +22,7 @@ class FilmeDto(
     val notaMedia: Double,
 
     @SerializedName("release_date")
-    val dataLancamento: String,
+    val dataLancamento: Date,
 
     @SerializedName("genre_ids")
     val generosIds: IntArray,

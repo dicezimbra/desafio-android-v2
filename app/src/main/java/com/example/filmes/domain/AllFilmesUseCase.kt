@@ -1,6 +1,6 @@
 package com.example.filmes.domain
 
-import com.example.filmes.data.FilmeRepository
+import com.example.filmes.data.repository.FilmeRepository
 import com.example.filmes.data.model.ResultadoFilmeDto
 
 class AllFilmesUseCase(val repository: FilmeRepository) {

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.filmes.data.FilmeRepository
 import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.data.repository.FilmeRepository
 import com.example.filmes.domain.AllFilmesUseCase
 import com.example.filmes.domain.PesquisarUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -27,8 +27,8 @@ class FilmeViewModel(filmeRepository: FilmeRepository) : ViewModel() {
     fun getAllFilmes(){
         CoroutineScope(Dispatchers.Main).launch {
             var listFilmes = withContext(Dispatchers.Default) {
-                 filmesUseCase.invoke()?.listFilmeDtos
-            }
+                    filmesUseCase.invoke()?.listFilmeDtos
+                }
             mutableAllFilmes.value = listFilmes
         }
     }
@@ -36,7 +36,7 @@ class FilmeViewModel(filmeRepository: FilmeRepository) : ViewModel() {
     fun getPesquisarFilmes(nome:String){
         CoroutineScope(Dispatchers.Main).launch {
             var listFilmes = withContext(Dispatchers.Default) {
-                pesquisarUseCase.invoke(nome)!!.listFilmeDtos
+                pesquisarUseCase.invoke(nome)?.listFilmeDtos
             }
             mutableAllFilmes.value = listFilmes
         }

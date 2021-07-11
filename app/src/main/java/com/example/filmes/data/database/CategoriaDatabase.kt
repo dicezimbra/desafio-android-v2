@@ -4,5 +4,5 @@ import com.example.filmes.data.model.ResultadoCategoriaDto
 
 interface CategoriaDatabase {
 
-    fun getAllCategorias() : ResultadoCategoriaDto
+    suspend fun getAllCategorias() : ResultadoCategoriaDto?
 }

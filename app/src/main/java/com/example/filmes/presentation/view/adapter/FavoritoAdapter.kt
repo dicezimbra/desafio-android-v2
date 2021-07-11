@@ -9,10 +9,10 @@ import com.example.filmes.R
 import com.example.filmes.data.api.FilmeRetrofitTask
 import com.example.filmes.data.model.FilmeDto
 import kotlinx.android.synthetic.main.favorito_item.view.*
-import kotlinx.android.synthetic.main.popular_item.view.*
+import java.text.SimpleDateFormat
 
 class FavoritoAdapter(
-    var listener: OnItemClickFilmeListener,
+    var listener: OnItemClickFavoritoListener,
     var listFilmes: ArrayList<FilmeDto>
 ) : RecyclerView.Adapter<FavoritoAdapter.viewHolder>() {
 
@@ -24,20 +24,31 @@ class FavoritoAdapter(
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         var filme = listFilmes[position]
         with(holder.itemView){
-            var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.backdropPath
+            var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.posterFilme
             Glide.with(this).load(urlImagem).into(imagemFavorito)
+
+            val formatoData = SimpleDateFormat("dd/MM/yyyy")
+            val dataLancamento = formatoData.format(filme.dataLancamento)
+
             textViewNomeFavorito.text = filme.tituloFilme
-            textViewAnoLancamentoFavorito.text = filme.dataLancamento
+            textViewAnoLancamentoFavorito.text = dataLancamento
             textViewDescricaoFavorito.text = filme.sinopse
+
+            buttonFavorito.setOnClickListener { listener.onClickButtonFavorito(filme) }
         }
     }
 
     override fun getItemCount(): Int = listFilmes.size
 
-    class viewHolder(itemView: View, listener: OnItemClickFilmeListener) : RecyclerView.ViewHolder(itemView){
+    class viewHolder(itemView: View, listener: OnItemClickFavoritoListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener { listener.onClick(adapterPosition) }
         }
     }
 
+}
+interface OnItemClickFavoritoListener {
+    fun onClick(posicao : Int)
+
+    fun onClickButtonFavorito(filme: FilmeDto)
 }

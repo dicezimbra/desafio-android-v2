@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp">
+    android:layout_height="160dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewFavorito"
-        android:layout_width="130dp"
+        android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="10dp">
@@ -15,7 +15,8 @@
             android:id="@+id/imagemFavorito"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black" />
+            android:background="@color/black"
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -26,7 +27,8 @@
         android:layout_toEndOf="@+id/cardViewFavorito"
         android:text="Titulo do Filme"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/textViewAnoLancamentoFavorito"
@@ -38,7 +40,8 @@
         android:layout_toEndOf="@+id/cardViewFavorito"
         android:singleLine="true"
         android:text="Data de Lançamento"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/textViewDescricaoFavorito"
@@ -50,10 +53,11 @@
         android:layout_toEndOf="@+id/cardViewFavorito"
         android:maxLines="3"
         android:text="Harry Potter and the Philosopher's Stone Esta é a primeira adaptação da série de best-sellers de Harry Potter, sobre um órfão que descobre que os seus pais eram feiticeiros e que ele também possui poderes mágicos. Harry Potter passou a maior parte do seu tempo debaixo da escada na casa dos Dursleys, seus tios que não gostam dele. Porém, quando é convidado para estudar na Escola de Feitiços e Magia Hogwart, Harry percebe que existem dois mundos: um é o mundo sem graça dos humanos comuns e o outro é cheio de magia, encanto e fantasia."
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        android:textColor="@color/white"/>
 
     <Button
-        android:id="@+id/linearFavorito"
+        android:id="@+id/buttonFavorito"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,9 +66,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:layout_toEndOf="@+id/cardViewFavorito"
-        android:text="Favorito"
+        android:text="Desfavoritar"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:foregroundTint="@color/white"
         android:textStyle="bold"/>
+
 </RelativeLayout>

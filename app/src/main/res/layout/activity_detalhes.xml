@@ -27,10 +27,9 @@
                 android:layout_marginTop="-21dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="-36dp"
-                android:backgroundTint="@color/corCinza"
-                android:src="@drawable/ic_baseline_favorite_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:backgroundTint="@color/corCinza"/>
+                android:src="@drawable/nao_favorito"
+                app:backgroundTint="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewImagem"
@@ -59,19 +58,33 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:layout_toStartOf="@id/floatingSalvar"
                 android:text="Nome do Pacote"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewGeneroDetalhes"
+                android:id="@+id/textViewDataDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewNomeDetalhes"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_toStartOf="@id/textViewNotaDetalhes"
+                android:text="Data"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/textViewGeneroDetalhes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNotaDetalhes"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:text="Gêneros Gêneros Gêneros Gêneros"
                 android:textColor="@color/white"
                 android:textSize="16sp"

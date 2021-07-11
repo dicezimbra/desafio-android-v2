@@ -25,6 +25,7 @@ interface FilmeApi {
     @GET("genre/movie/list")
     suspend fun getAllCategorias(
         @Query("api_key") chaveApi:String,
+        @Query("language") idioma:String
     ) : Response<ResultadoCategoriaDto>
 
 

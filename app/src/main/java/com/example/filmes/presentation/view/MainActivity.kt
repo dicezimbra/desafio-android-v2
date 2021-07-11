@@ -1,37 +1,46 @@
 package com.example.filmes.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R.attr.data
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.R
-import com.example.filmes.data.FilmeRepository
 import com.example.filmes.data.api.FilmeRetrofitTask
+import com.example.filmes.data.repository.FilmeRepository
 import com.example.filmes.presentation.view.adapter.ViewPageAdapter
 import com.example.filmes.presentation.viewModel.FilmeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var filmeViewModel:FilmeViewModel
-    var repository = FilmeRepository(FilmeRetrofitTask())
+    var retrofitTask = FilmeRetrofitTask()
+    private val TAG = "MainActivity"
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        filmeViewModel = ViewModelProvider(
+            this,
+            FilmeViewModel.ViewModelFactory(FilmeRepository(retrofitTask))
+        )
+            .get(FilmeViewModel::class.java)
 
         initView()
     }
 
     private fun initView() {
-        filmeViewModel = ViewModelProvider(this, FilmeViewModel.ViewModelFactory(repository))
-            .get(FilmeViewModel::class.java)
         setSupportActionBar(toolbarFilme)
         tabLayoutFilme.tabSelectedIndicator
         var pageAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
