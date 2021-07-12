@@ -14,29 +14,27 @@ import com.example.filmes.presentation.view.adapter.ViewPageAdapter
 import com.example.filmes.presentation.viewModel.MovieViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var movieViewModel:MovieViewModel
-    var retrofitTask = RetrofitTask()
+    private val movieViewModel:MovieViewModel by viewModel()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        movieViewModel = ViewModelProvider(
-            this,
-            MovieViewModel.ViewModelFactory(MovieImplementation(retrofitTask))
-        )
-            .get(MovieViewModel::class.java)
-
         initView()
     }
 
     private fun initView() {
         setSupportActionBar(toolbar_main)
+        ConfigTabLayout()
+    }
+
+    private fun ConfigTabLayout() {
         tab_layout.tabSelectedIndicator
         var pageAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
         movie_viewPage.adapter = pageAdapter
@@ -64,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                movieViewModel.searchMovie(newText+"")
+                PopularFragment().searchMovie(newText+"")
                 return true
             }
         })

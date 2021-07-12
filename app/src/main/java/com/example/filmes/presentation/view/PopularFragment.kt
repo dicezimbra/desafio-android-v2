@@ -17,10 +17,11 @@ import com.example.filmes.presentation.view.adapter.OnItemClickPopularListener
 import com.example.filmes.presentation.viewModel.MovieViewModel
 import com.example.filmes.presentation.view.adapter.PopularAdapter
 import kotlinx.android.synthetic.main.fragment_popular.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() , OnItemClickPopularListener{
 
-    lateinit var movieViewModel: MovieViewModel
+    private val movieViewModel:MovieViewModel by viewModel()
     lateinit var movieList:ArrayList<MovieDto>
     var retrofitTask = RetrofitTask()
 
@@ -45,11 +46,6 @@ class PopularFragment : Fragment() , OnItemClickPopularListener{
     }
 
     private fun ConfigViewModel() {
-        movieViewModel = ViewModelProvider(
-            this,
-            MovieViewModel.ViewModelFactory(MovieImplementation(retrofitTask))
-        ).get(MovieViewModel::class.java)
-
         movieViewModel.getAllMovies()
     }
 
@@ -72,10 +68,12 @@ class PopularFragment : Fragment() , OnItemClickPopularListener{
     }
 
     override fun onClick(posicao: Int) {
-//        movieViewModel.searchMovie(movieList[posicao].tituloFilme)
         var intent = Intent(activity, DetalhesActivity::class.java)
         intent.putExtra(R.string.KEY_MOVIE.toString(), movieList[posicao])
         startActivity(intent)
     }
 
+    fun searchMovie(name:String){
+        movieViewModel.searchMovie(name+"")
+    }
 }

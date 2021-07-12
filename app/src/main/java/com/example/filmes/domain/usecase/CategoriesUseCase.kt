@@ -1,4 +1,4 @@
-package com.example.filmes.domain
+package com.example.filmes.domain.usecase
 
 import android.util.Log
 import com.example.filmes.data.repository.CategoriesRepository

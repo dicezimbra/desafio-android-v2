@@ -3,20 +3,19 @@ package com.example.filmes.presentation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.example.filmes.data.api.RetrofitTask
 import com.example.filmes.data.repository.MovieImplementation
-import com.example.filmes.domain.MovieUseCase
-import com.example.filmes.domain.SearchUseCase
+import com.example.filmes.domain.usecase.MovieUseCase
+import com.example.filmes.domain.usecase.SearchUseCase
 import com.example.filmes.domain.model.ResultsMoviesDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MovieViewModel(movieImplementation: MovieImplementation) : ViewModel() {
+class MovieViewModel(private var movieUseCase: MovieUseCase) : ViewModel() {
 
-    var movieUseCase = MovieUseCase(movieImplementation)
-    var searchUseCase = SearchUseCase(movieImplementation)
+    var searchUseCase = SearchUseCase(MovieImplementation(RetrofitTask()))
 
     var movieListMutable = MutableLiveData<ResultsMoviesDto>()
 
@@ -38,13 +37,6 @@ class MovieViewModel(movieImplementation: MovieImplementation) : ViewModel() {
                 searchUseCase.invoke(nome)
             }
             movieListMutable.value = movieList
-        }
-    }
-
-    class ViewModelFactory(val movieImplementation: MovieImplementation) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return modelClass.getConstructor(MovieImplementation::class.java)
-                .newInstance(movieImplementation)
         }
     }
 }
