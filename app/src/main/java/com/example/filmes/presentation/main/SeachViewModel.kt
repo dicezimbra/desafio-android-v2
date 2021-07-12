@@ -12,17 +12,17 @@ import kotlinx.coroutines.withContext
 
 class SeachViewModel(private val searchUseCase: SearchUseCase) : ViewModel() {
 
-    private val _movieList = MutableLiveData<ResultsMoviesDto>()
+    private val _resultsMovie = MutableLiveData<ResultsMoviesDto>()
 
     val movieList: LiveData<ResultsMoviesDto>
-        get() = _movieList
+        get() = _resultsMovie
 
     fun searchMovie(nome:String){
         CoroutineScope(Dispatchers.Main).launch {
             var movieList = withContext(Dispatchers.Default) {
                 searchUseCase.invoke(nome)
             }
-            _movieList.value = movieList
+            _resultsMovie.value = movieList
         }
     }
 }

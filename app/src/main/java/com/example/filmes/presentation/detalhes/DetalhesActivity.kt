@@ -15,12 +15,14 @@ import com.example.filmes.presentation.main.MainActivity
 import com.example.filmes.presentation.SharedPreferencesViewModel
 import com.example.filmes.domain.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.activity_detalhes.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 
 
 class DetalhesActivity : AppCompatActivity() {
 
-    var listFilmesSalvo = ArrayList<MovieDto>()
+    private val categoriesViewModel:CategoriesViewModel by viewModel()
+    var listaSalva = ArrayList<MovieDto>()
     lateinit var movie: MovieDto
     lateinit var preferencesViewModel: SharedPreferencesViewModel
 
@@ -34,20 +36,41 @@ class DetalhesActivity : AppCompatActivity() {
             SharedPreferencesViewModel.ViewModelFactory(preferencesConfig)
         ).get(SharedPreferencesViewModel::class.java)
 
-
         initView()
-        initObserver()
-        floating_save_details.setOnClickListener {
-            preferencesViewModel.inserirListFavorito(movie, listFilmesSalvo)
-            preferencesViewModel.verificarFavorito(movie, listFilmesSalvo)
-        }
+        setupCategories()
+    }
+
+    private fun setupCategories(){
+        categoriesViewModel.getCategories()
+        categoriesViewModel.categories.observe(this, { resultsC ->
+            var genresList = resultsC.generosFilme
+            var nomeCategorias = ""
+            if(!genresList.isNullOrEmpty()){
+                genresList.forEach { idGenero ->
+                    movie.generosIds.forEach { idDoFilme ->
+                        if(idGenero.id.equals(idDoFilme)){
+                            nomeCategorias += idGenero.nome+", "
+                        }
+                    }
+                }
+            }
+            txt_movie_genre_details.text = nomeCategorias
+        })
     }
 
     private fun initView() {
-        movie = intent.getParcelableExtra(R.string.KEY_MOVIE.toString())!!
         setSupportActionBar(toolbar_details)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupFilme()
+        setupViewModel()
+        floating_save_details.setOnClickListener {
+            preferencesViewModel.inserirListFavorito(movie, listaSalva)
+            preferencesViewModel.verificarFavorito(movie, listaSalva)
+        }
+    }
 
+    private fun setupFilme() {
+        movie = intent.getParcelableExtra(R.string.KEY_MOVIE.toString())!!
         Glide.with(this).load(RetrofitTask.BASE_IMAGEM + movie.backdropPath).into(img_movie_details)
         txt_movie_title_details.text = movie.tituloFilme
         txt_movie_description_details.text = movie.sinopse
@@ -55,14 +78,13 @@ class DetalhesActivity : AppCompatActivity() {
         val dataLancamento = formatoData.format(movie.dataLancamento)
         txt_movie_date_details.text = "Lançamento: $dataLancamento"
         txt_movie_note_details.text = "${movie.notaMedia}/10 \nAvaliação"
-
-        preferencesViewModel.getListaSalva()
     }
 
-    private fun initObserver() {
-        preferencesViewModel.listaFilmes.observe(this, Observer { listSalvos ->
-            listFilmesSalvo = listSalvos
-            preferencesViewModel.verificarFavorito(movie, listFilmesSalvo)
+    private fun setupViewModel() {
+        preferencesViewModel.getListaSalva()
+        preferencesViewModel.listaFilmes.observe(this, { listSalvos ->
+            listaSalva = listSalvos
+            preferencesViewModel.verificarFavorito(movie, listaSalva)
         })
 
         preferencesViewModel.favorito.observe(this, Observer { foiSalvo ->

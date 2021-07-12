@@ -1,6 +1,7 @@
 package com.example.filmes
 
 import android.app.Application
+import com.example.filmes.di.CategoriesModule
 import com.example.filmes.di.MovieModule
 import com.example.filmes.di.SharedModule
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,7 @@ class MainApp  : Application(){
         startKoin {
             androidLogger(Level.INFO)
             androidContext(this@MainApp)
-            modules(listOf(SharedModule, MovieModule))
+            modules(listOf(SharedModule, MovieModule, CategoriesModule))
         }
     }
 }
