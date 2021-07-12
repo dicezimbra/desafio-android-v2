@@ -1,4 +1,4 @@
-package com.example.filmes.utils
+package com.example.filmes.domain
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

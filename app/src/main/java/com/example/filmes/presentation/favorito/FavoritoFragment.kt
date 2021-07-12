@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.view
+package com.example.filmes.presentation.favorito
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,13 +13,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.presentation.view.adapter.FavoritoAdapter
-import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
-import com.example.filmes.presentation.viewModel.SharedPreferencesViewModel
-import com.example.filmes.utils.SharedPreferecesConfig
+import com.example.filmes.presentation.detalhes.DetalhesActivity
+import com.example.filmes.presentation.adapter.FavoritoAdapter
+import com.example.filmes.presentation.adapter.OnItemClickFavoritoListener
+import com.example.filmes.presentation.SharedPreferencesViewModel
+import com.example.filmes.domain.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.fragment_favorito.*
 
-class FavoritoFragment : Fragment() , OnItemClickFavoritoListener{
+class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     lateinit var listMovieSalvo:ArrayList<MovieDto>
     lateinit var preferencesConfig: SharedPreferecesConfig
@@ -56,7 +57,7 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener{
     }
 
     private fun ConfigObserver() {
-        preferencesViewModel.liveAllFilmesSalvos.observe(requireActivity(), Observer { listSalvo ->
+        preferencesViewModel.listaFilmes.observe(requireActivity(), Observer { listSalvo ->
             if(listSalvo.isNotEmpty())
                 txt_none_favorite.visibility = View.GONE
             else

@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.view
+package com.example.filmes.presentation.main
 
 import android.os.Build
 import android.os.Bundle
@@ -6,12 +6,8 @@ import android.view.Menu
 import android.widget.SearchView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.R
-import com.example.filmes.data.api.RetrofitTask
-import com.example.filmes.data.repository.MovieImplementation
-import com.example.filmes.presentation.view.adapter.ViewPageAdapter
-import com.example.filmes.presentation.viewModel.MovieViewModel
+import com.example.filmes.presentation.popular.MovieViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val movieViewModel:MovieViewModel by viewModel()
+    private val movieViewModel: MovieViewModel by viewModel()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                PopularFragment().searchMovie(newText+"")
+//                PopularFragment().searchMovie(newText+"")
                 return true
             }
         })

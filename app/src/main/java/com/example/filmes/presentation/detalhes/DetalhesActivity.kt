@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.view
+package com.example.filmes.presentation.detalhes
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.filmes.R
 import com.example.filmes.data.api.RetrofitTask
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.presentation.viewModel.SharedPreferencesViewModel
-import com.example.filmes.utils.SharedPreferecesConfig
+import com.example.filmes.presentation.main.MainActivity
+import com.example.filmes.presentation.SharedPreferencesViewModel
+import com.example.filmes.domain.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.activity_detalhes.*
 import java.text.SimpleDateFormat
 
@@ -21,7 +22,7 @@ class DetalhesActivity : AppCompatActivity() {
 
     var listFilmesSalvo = ArrayList<MovieDto>()
     lateinit var movie: MovieDto
-    lateinit var preferencesViewModel:SharedPreferencesViewModel
+    lateinit var preferencesViewModel: SharedPreferencesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +60,12 @@ class DetalhesActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        preferencesViewModel.liveAllFilmesSalvos.observe(this, Observer { listSalvos ->
+        preferencesViewModel.listaFilmes.observe(this, Observer { listSalvos ->
             listFilmesSalvo = listSalvos
             preferencesViewModel.verificarFavorito(movie, listFilmesSalvo)
         })
 
-        preferencesViewModel.liveVerificarFavorito.observe(this, Observer { foiSalvo ->
+        preferencesViewModel.favorito.observe(this, Observer { foiSalvo ->
             var imagemInt = if(foiSalvo){
                 R.drawable.favorito
             }else{

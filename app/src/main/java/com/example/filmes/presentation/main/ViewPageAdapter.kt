@@ -1,11 +1,11 @@
-package com.example.filmes.presentation.view.adapter
+package com.example.filmes.presentation.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.filmes.presentation.view.FavoritoFragment
-import com.example.filmes.presentation.view.PopularFragment
+import com.example.filmes.presentation.favorito.FavoritoFragment
+import com.example.filmes.presentation.popular.PopularFragment
 
 class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 

@@ -4,7 +4,7 @@ import com.example.filmes.data.api.RetrofitTask
 import com.example.filmes.data.repository.MovieImplementation
 import com.example.filmes.data.repository.MovieRepository
 import com.example.filmes.domain.usecase.MovieUseCase
-import com.example.filmes.presentation.viewModel.MovieViewModel
+import com.example.filmes.presentation.popular.MovieViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

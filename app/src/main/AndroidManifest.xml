@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Filmes"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.view.DetalhesActivity"></activity>
-        <activity android:name=".presentation.view.MainActivity">
+        <activity android:name=".presentation.detalhes.DetalhesActivity"></activity>
+        <activity android:name=".presentation.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
