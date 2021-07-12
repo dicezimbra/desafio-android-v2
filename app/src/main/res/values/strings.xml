@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Filmes</string>
-    <string name="titulo_filme">Título do Filme</string>
-    <string name="data_lancamento">Data de Lançamento</string>
-    <string name="desfavoritar">Desfavoritar</string>
-    <string name="descricao">Descrição</string>
+    <string name="movie_title">Título do Filme</string>
+    <string name="release_date">Data de Lançamento</string>
+    <string name="delete_favorite">Desfavoritar</string>
+    <string name="movie_description">Descrição</string>
+    <string name="search">Search</string>
+    <string name="movie_note">Nota</string>
+    <string name="movie_genre">Gêneros</string>
+    <string name="none_movie_saved">Nenhum filme Salvo</string>
 
     <!--    Keys-->
-    <string name="KEY_FILME">filme</string>
-    <string name="search">Search</string>
-    <string name="nota">Nota</string>
-    <string name="generos">Gêneros</string>
-    <string name="nenhum_filme_salvo">Nenhum filme Salvo</string>
-    <string name="nenhum_filme">Nenhum Filme</string>
+    <string name="KEY_MOVIE">key_movie</string>
+    <string name="error_conection">Erro de conexão com a rede</string>
 </resources>

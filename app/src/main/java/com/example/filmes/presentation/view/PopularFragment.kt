@@ -10,63 +10,71 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
-import com.example.filmes.data.repository.FilmeRepository
-import com.example.filmes.data.api.FilmeRetrofitTask
-import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.data.repository.MovieImplementation
+import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.OnItemClickPopularListener
-import com.example.filmes.presentation.viewModel.FilmeViewModel
+import com.example.filmes.presentation.viewModel.MovieViewModel
 import com.example.filmes.presentation.view.adapter.PopularAdapter
 import kotlinx.android.synthetic.main.fragment_popular.*
 
 class PopularFragment : Fragment() , OnItemClickPopularListener{
 
-    lateinit var filmeViewModel: FilmeViewModel
-    lateinit var listFilme:ArrayList<FilmeDto>
-    var retrofitTask = FilmeRetrofitTask()
+    lateinit var movieViewModel: MovieViewModel
+    lateinit var movieList:ArrayList<MovieDto>
+    var retrofitTask = RetrofitTask()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_popular, container, false)
+        return inflater.inflate(R.layout.fragment_popular, container, false)
+    }
 
-        filmeViewModel = ViewModelProvider(
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initView()
+
+        progressBar_popular.visibility = View.VISIBLE
+        refresh_popular.setOnRefreshListener {
+            movieViewModel.getAllMovies()
+            refresh_popular.isRefreshing = false
+        }
+    }
+
+    private fun initView() {
+        ConfigViewModel()
+        ConfigObserver()
+    }
+
+    private fun ConfigViewModel() {
+        movieViewModel = ViewModelProvider(
             this,
-            FilmeViewModel.ViewModelFactory(FilmeRepository(retrofitTask))
-        )
-            .get(FilmeViewModel::class.java)
+            MovieViewModel.ViewModelFactory(MovieImplementation(retrofitTask))
+        ).get(MovieViewModel::class.java)
 
-        filmeViewModel.getAllFilmes()
-        initObserver()
-
-        return view
+        movieViewModel.getAllMovies()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        progressBarPopular.visibility = View.VISIBLE
-    }
-
-    fun initObserver(){
-        filmeViewModel.liveDataListFilmes.observe(requireActivity(), Observer { filmes ->
-            if(filmes != null){
-                listFilme = filmes
-                atualizarAdapterPopular(listFilme)
+    fun ConfigObserver(){
+        movieViewModel.movieLiveData.observe(requireActivity(), Observer { filmes ->
+            if(filmes.movieList.isNotEmpty()){
+                movieList = filmes.movieList
+                atualizarAdapterPopular(movieList)
+                textViewErroConexao.visibility = View.GONE
             }else{
-                textViewErroConexao.text = "Erro de conexão com a rede"
                 textViewErroConexao.visibility = View.VISIBLE
             }
-            progressBarPopular.visibility = View.GONE
+            progressBar_popular.visibility = View.GONE
     })}
 
-    fun atualizarAdapterPopular(listFilmes: ArrayList<FilmeDto>){
-        var popularAdapter = PopularAdapter(this, listFilmes)
-        recyclerViewPopulares.layoutManager = LinearLayoutManager(activity)
-        recyclerViewPopulares.adapter = popularAdapter
+    fun atualizarAdapterPopular(listMovies: ArrayList<MovieDto>){
+        var popularAdapter = PopularAdapter(this, listMovies)
+        recyclerView_popular.layoutManager = LinearLayoutManager(activity)
+        recyclerView_popular.adapter = popularAdapter
     }
 
     override fun onClick(posicao: Int) {
-//        filmeViewModel.getPesquisarFilmes(listFilme[posicao].tituloFilme)
-
+//        movieViewModel.searchMovie(movieList[posicao].tituloFilme)
         var intent = Intent(activity, DetalhesActivity::class.java)
-        intent.putExtra(R.string.KEY_FILME.toString(), listFilme[posicao])
+        intent.putExtra(R.string.KEY_MOVIE.toString(), movieList[posicao])
         startActivity(intent)
     }
 

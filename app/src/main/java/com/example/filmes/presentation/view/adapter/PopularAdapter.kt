@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.api.FilmeRetrofitTask
-import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.domain.model.MovieDto
 import kotlinx.android.synthetic.main.popular_item.view.*
 import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
 
 class PopularAdapter(
     var listener: OnItemClickPopularListener,
-    var listFilmes: ArrayList<FilmeDto>
+    var listMovies: ArrayList<MovieDto>
 ) : RecyclerView.Adapter<PopularAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
@@ -23,20 +23,20 @@ class PopularAdapter(
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        var filme = listFilmes[position]
+        var filme = listMovies[position]
         with(holder.itemView){
-            var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.backdropPath
-            Glide.with(this).load(urlImagem).into(imagemFilme)
+            var urlImagem = RetrofitTask.BASE_IMAGEM + filme.backdropPath
+            Glide.with(this).load(urlImagem).into(img_movie_popular)
 
             val formatoData = SimpleDateFormat("dd/MM/yyyy")
             val dataLancamento = formatoData.format(filme.dataLancamento)
 
-            textViewAnoLancamento.text = "Lançamento: $dataLancamento"
-            textViewNomeFilme.text = filme.tituloFilme
+            txt_release_date.text = "Lançamento: $dataLancamento"
+            txt_movie_title_popular.text = filme.tituloFilme
         }
     }
 
-    override fun getItemCount(): Int = listFilmes.size
+    override fun getItemCount(): Int = listMovies.size
 
     class viewHolder(itemView: View, listener: OnItemClickPopularListener): RecyclerView.ViewHolder(itemView){
         init {

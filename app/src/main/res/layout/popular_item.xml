@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imagemFilme"
+            android:id="@+id/img_movie_popular"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentTop="true"
@@ -25,7 +25,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textViewNomeFilme"
+            android:id="@+id/txt_movie_title_popular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroundOpacidade50"
@@ -33,24 +33,24 @@
             android:paddingHorizontal="16dp"
             android:paddingTop="4dp"
             android:singleLine="true"
-            android:text="@string/titulo_filme"
+            android:text="@string/movie_title"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textViewAnoLancamento" />
+            app:layout_constraintBottom_toTopOf="@+id/txt_release_date" />
 
         <TextView
-            android:id="@+id/textViewAnoLancamento"
+            android:id="@+id/txt_release_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroundOpacidade50"
             android:paddingStart="16sp"
             android:paddingTop="4dp"
             android:paddingBottom="8dp"
-            android:text="@string/data_lancamento"
+            android:text="@string/release_date"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imagemFilme" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_movie_popular" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

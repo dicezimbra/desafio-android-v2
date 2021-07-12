@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="backgroundOpacidade50">#80000000</color>
-    <color name="corCinza">#d3d3d3</color>
+    <color name="colorGray">#d3d3d3</color>
     <color name="background">#282037</color>
     <color name="primaryColor">#360b44</color>
     <color name="lightColor">#623570</color>

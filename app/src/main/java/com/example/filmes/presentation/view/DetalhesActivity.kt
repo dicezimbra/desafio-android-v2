@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.api.FilmeRetrofitTask
-import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.viewModel.SharedPreferencesViewModel
 import com.example.filmes.utils.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.activity_detalhes.*
@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat
 
 class DetalhesActivity : AppCompatActivity() {
 
-    var listFilmesSalvo = ArrayList<FilmeDto>()
-    lateinit var filme:FilmeDto
+    var listFilmesSalvo = ArrayList<MovieDto>()
+    lateinit var movie: MovieDto
     lateinit var preferencesViewModel:SharedPreferencesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,24 +36,24 @@ class DetalhesActivity : AppCompatActivity() {
 
         initView()
         initObserver()
-        floatingSalvar.setOnClickListener {
-            preferencesViewModel.inserirListFavorito(filme, listFilmesSalvo)
-            preferencesViewModel.verificarFavorito(filme, listFilmesSalvo)
+        floating_save_details.setOnClickListener {
+            preferencesViewModel.inserirListFavorito(movie, listFilmesSalvo)
+            preferencesViewModel.verificarFavorito(movie, listFilmesSalvo)
         }
     }
 
     private fun initView() {
-        filme = intent.getParcelableExtra(R.string.KEY_FILME.toString())!!
-        setSupportActionBar(toolbarDetalhes)
+        movie = intent.getParcelableExtra(R.string.KEY_MOVIE.toString())!!
+        setSupportActionBar(toolbar_details)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        Glide.with(this).load(FilmeRetrofitTask.BASE_IMAGEM + filme.backdropPath).into(imagemFilmeDetalhes)
-        textViewNomeDetalhes.text = filme.tituloFilme
-        textViewDescricaoDetalhes.text = filme.sinopse
+        Glide.with(this).load(RetrofitTask.BASE_IMAGEM + movie.backdropPath).into(img_movie_details)
+        txt_movie_title_details.text = movie.tituloFilme
+        txt_movie_description_details.text = movie.sinopse
         val formatoData = SimpleDateFormat("dd/MM/yyyy")
-        val dataLancamento = formatoData.format(filme.dataLancamento)
-        textViewDataDetalhes.text = "Lançamento: $dataLancamento"
-        textViewNotaDetalhes.text = "${filme.notaMedia}/10 \nAvaliação"
+        val dataLancamento = formatoData.format(movie.dataLancamento)
+        txt_movie_date_details.text = "Lançamento: $dataLancamento"
+        txt_movie_note_details.text = "${movie.notaMedia}/10 \nAvaliação"
 
         preferencesViewModel.getListaSalva()
     }
@@ -61,7 +61,7 @@ class DetalhesActivity : AppCompatActivity() {
     private fun initObserver() {
         preferencesViewModel.liveAllFilmesSalvos.observe(this, Observer { listSalvos ->
             listFilmesSalvo = listSalvos
-            preferencesViewModel.verificarFavorito(filme, listFilmesSalvo)
+            preferencesViewModel.verificarFavorito(movie, listFilmesSalvo)
         })
 
         preferencesViewModel.liveVerificarFavorito.observe(this, Observer { foiSalvo ->
@@ -70,7 +70,7 @@ class DetalhesActivity : AppCompatActivity() {
             }else{
                 R.drawable.nao_favorito
             }
-            floatingSalvar.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), imagemInt));
+            floating_save_details.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), imagemInt));
         })
     }
 

@@ -1,4 +1,4 @@
-package com.example.filmes.data.model
+package com.example.filmes.domain.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -7,7 +7,7 @@ import java.lang.reflect.Array
 import java.util.*
 
 @Parcelize
-class FilmeDto(
+data class MovieDto(
 
     @SerializedName("poster_path")
     val posterFilme: String,

@@ -6,39 +6,39 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.api.FilmeRetrofitTask
-import com.example.filmes.data.model.FilmeDto
-import kotlinx.android.synthetic.main.favorito_item.view.*
+import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.domain.model.MovieDto
+import kotlinx.android.synthetic.main.favorite_item.view.*
 import java.text.SimpleDateFormat
 
 class FavoritoAdapter(
     var listener: OnItemClickFavoritoListener,
-    var listFilmes: ArrayList<FilmeDto>
+    var movieList: ArrayList<MovieDto>
 ) : RecyclerView.Adapter<FavoritoAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.favorito_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.favorite_item, parent, false)
         return viewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        var filme = listFilmes[position]
+        var movie = movieList[position]
         with(holder.itemView){
-            var urlImagem = FilmeRetrofitTask.BASE_IMAGEM + filme.posterFilme
-            Glide.with(this).load(urlImagem).into(imagemFavorito)
+            var imageUrl = RetrofitTask.BASE_IMAGEM + movie.posterFilme
+            Glide.with(this).load(imageUrl).into(img_movie_favorite)
 
-            val formatoData = SimpleDateFormat("dd/MM/yyyy")
-            val dataLancamento = formatoData.format(filme.dataLancamento)
+            val formatDate = SimpleDateFormat("dd/MM/yyyy")
+            val realeseDate = formatDate.format(movie.dataLancamento)
 
-            textViewNomeFavorito.text = filme.tituloFilme
-            textViewAnoLancamentoFavorito.text = dataLancamento
-            textViewDescricaoFavorito.text = filme.sinopse
+            txt_movie_title_favorite.text = movie.tituloFilme
+            txt_release_date_favorite.text = realeseDate
+            txt_movie_description_favorite.text = movie.sinopse
 
-            buttonFavorito.setOnClickListener { listener.onClickButtonFavorito(filme) }
+            bnt_favorite.setOnClickListener { listener.onClickButtonFavorito(movie) }
         }
     }
 
-    override fun getItemCount(): Int = listFilmes.size
+    override fun getItemCount(): Int = movieList.size
 
     class viewHolder(itemView: View, listener: OnItemClickFavoritoListener) : RecyclerView.ViewHolder(itemView){
         init {
@@ -48,7 +48,7 @@ class FavoritoAdapter(
 
 }
 interface OnItemClickFavoritoListener {
-    fun onClick(posicao : Int)
+    fun onClick(position : Int)
 
-    fun onClickButtonFavorito(filme: FilmeDto)
+    fun onClickButtonFavorito(movie: MovieDto)
 }

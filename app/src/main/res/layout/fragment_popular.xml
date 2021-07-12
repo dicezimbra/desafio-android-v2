@@ -3,35 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.PopularFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".presentation.view.PopularFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPopulares"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_popular"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/popular_item"
-        android:padding="16dp"
-        android:layout_alignParentTop="true"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_popular"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:padding="16dp"
+            tools:listitem="@layout/popular_item" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
-        android:id="@+id/progressBarPopular"
+        android:id="@+id/progressBar_popular"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textViewErroConexao"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="@string/nenhum_filme"
-        android:textColor="@color/white"
-        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:gravity="center"
+        android:text="@string/error_conection"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

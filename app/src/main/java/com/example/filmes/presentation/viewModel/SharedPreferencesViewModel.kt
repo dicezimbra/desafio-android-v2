@@ -4,49 +4,47 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.filmes.data.model.FilmeDto
+import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.utils.SharedPreferecesConfig
 
 class SharedPreferencesViewModel(var preferecesConfig: SharedPreferecesConfig) :ViewModel(){
 
     var mutableVerificarFavorito = MutableLiveData<Boolean>()
-    var mutableAllFilmesSalvos = MutableLiveData<ArrayList<FilmeDto>>()
+    var mutableAllFilmesSalvos = MutableLiveData<ArrayList<MovieDto>>()
 
     val liveVerificarFavorito:LiveData<Boolean>
         get() = mutableVerificarFavorito
 
-    val liveAllFilmesSalvos:LiveData<ArrayList<FilmeDto>>
+    val liveAllFilmesSalvos:LiveData<ArrayList<MovieDto>>
         get() = mutableAllFilmesSalvos
 
-    fun inserirListFavorito(filme:FilmeDto, listFilmesSalvo:ArrayList<FilmeDto>){
+    fun inserirListFavorito(movie: MovieDto, listFilmesSalvo:ArrayList<MovieDto>){
         var jaEstaSalvo = false
         var posicaoList:Int = -1
         for(posicao in listFilmesSalvo.indices){
-            if (filme.id == listFilmesSalvo[posicao].id){
+            if (movie.id == listFilmesSalvo[posicao].id){
                 jaEstaSalvo = true
                 posicaoList = posicao
             }
         }
-        if(jaEstaSalvo) {
+        if(jaEstaSalvo)
             listFilmesSalvo.removeAt(posicaoList)
-        } else {
-            listFilmesSalvo.add(filme)
-        }
+        else
+            listFilmesSalvo.add(movie)
 
-        preferecesConfig.setShared(listFilmesSalvo)
+        preferecesConfig.setListaSalva(listFilmesSalvo)
         getListaSalva()
     }
 
-    fun verificarFavorito(filme:FilmeDto, listFilmesSalvo:ArrayList<FilmeDto>){
+    fun verificarFavorito(movie: MovieDto, listFilmesSalvo:ArrayList<MovieDto>){
         var foiSalvo = false
         for(posicao in listFilmesSalvo.indices){
-            if (filme.id == listFilmesSalvo[posicao].id){
+            if (movie.id == listFilmesSalvo[posicao].id){
                 foiSalvo = true
             }
         }
         mutableVerificarFavorito.value = foiSalvo
-
-        preferecesConfig.setShared(listFilmesSalvo)
+        preferecesConfig.setListaSalva(listFilmesSalvo)
     }
 
     fun getListaSalva(){
