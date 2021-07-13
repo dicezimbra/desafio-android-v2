@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.main
+package com.example.filmes.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,17 +12,24 @@ import kotlinx.coroutines.withContext
 
 class SeachViewModel(private val searchUseCase: SearchUseCase) : ViewModel() {
 
-    private val _resultsMovie = MutableLiveData<ResultsMoviesDto>()
+    private val mMovieList = MutableLiveData<ResultsMoviesDto>()
+    private val mError = MutableLiveData<Boolean>()
 
     val movieList: LiveData<ResultsMoviesDto>
-        get() = _resultsMovie
+        get() = mMovieList
+
+    val error: LiveData<Boolean>
+        get() = mError
 
     fun searchMovie(nome:String){
         CoroutineScope(Dispatchers.Main).launch {
-            var movieList = withContext(Dispatchers.Default) {
+            var resultsMovies = withContext(Dispatchers.Default) {
                 searchUseCase.invoke(nome)
             }
-            _resultsMovie.value = movieList
+            if(resultsMovies.movieList.isNullOrEmpty())
+                mMovieList.value = resultsMovies
+            else
+                mError.value = false
         }
     }
 }

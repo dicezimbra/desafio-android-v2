@@ -9,14 +9,14 @@ class RetrofitTask {
         val BASE_IMAGEM = "https://image.tmdb.org/t/p/original/"
     }
 
-        private val BASE_URL = "https://api.themoviedb.org/3/"
-        val api_key = "ae69ec81dd60f4108a88423265126573"
-        val language = "pt-br"
+    private val BASE_URL = "https://api.themoviedb.org/3/"
+    val api_key = "ae69ec81dd60f4108a88423265126573"
+    val language = "pt-br"
 
-        private fun retrofitInstance() : Retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
-            .build()
+    private fun retrofitInstance() : Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+        .build()
 
 
-        fun getRetrofitTask() = retrofitInstance().create(MovieApi::class.java)
+    fun getRetrofitTask() = retrofitInstance().create(MovieApi::class.java)
 }

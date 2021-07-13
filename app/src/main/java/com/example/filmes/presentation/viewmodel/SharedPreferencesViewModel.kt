@@ -1,4 +1,4 @@
-package com.example.filmes.presentation
+package com.example.filmes.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,16 +9,16 @@ import com.example.filmes.domain.SharedPreferecesConfig
 
 class SharedPreferencesViewModel(var preferecesConfig: SharedPreferecesConfig) :ViewModel(){
 
-    private val _favorito = MutableLiveData<Boolean>()
-    private val _listaFilme = MutableLiveData<ArrayList<MovieDto>>()
+    private val mFavorito = MutableLiveData<Boolean>()
+    private val mListaFilme = MutableLiveData<ArrayList<MovieDto>>()
     private var foiSalvo = false
     var posicaoDaLista:Int = -1
 
     val favorito:LiveData<Boolean>
-        get() = _favorito
+        get() = mFavorito
 
     val listaFilmes:LiveData<ArrayList<MovieDto>>
-        get() = _listaFilme
+        get() = mListaFilme
 
     fun inserirListFavorito(movie: MovieDto, listaSalva:ArrayList<MovieDto>){
         verificar(listaSalva, movie)
@@ -28,17 +28,16 @@ class SharedPreferencesViewModel(var preferecesConfig: SharedPreferecesConfig) :
             listaSalva.add(movie)
 
         preferecesConfig.setListaSalva(listaSalva)
-        getListaSalva()
     }
 
     fun verificarFavorito(movie: MovieDto, listFilmesSalvo:ArrayList<MovieDto>){
         verificar(listFilmesSalvo, movie)
-        _favorito.value = foiSalvo
+        mFavorito.value = foiSalvo
         preferecesConfig.setListaSalva(listFilmesSalvo)
     }
 
     fun getListaSalva(){
-        _listaFilme.value = preferecesConfig.getListaSalva()
+        mListaFilme.value = preferecesConfig.getListaSalva()
     }
 
     private fun verificar(listFilmesSalvo: ArrayList<MovieDto>, movie: MovieDto){

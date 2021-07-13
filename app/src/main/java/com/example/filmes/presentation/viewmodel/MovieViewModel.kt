@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.popular
+package com.example.filmes.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,17 +12,24 @@ import kotlinx.coroutines.withContext
 
 class MovieViewModel(private var movieUseCase: MovieUseCase) : ViewModel() {
 
-    private val _movieList = MutableLiveData<ResultsMoviesDto>()
+    private val mMovieList = MutableLiveData<ResultsMoviesDto>()
+    private val mError = MutableLiveData<Boolean>()
 
     val movieList: LiveData<ResultsMoviesDto>
-        get() = _movieList
+        get() = mMovieList
+
+    val error: LiveData<Boolean>
+        get() = mError
 
     fun getAllMovies(){
         CoroutineScope(Dispatchers.Main).launch {
-            var movieList = withContext(Dispatchers.Default) {
+            var resultsMovies = withContext(Dispatchers.Default) {
                     movieUseCase.invoke()
                 }
-            this@MovieViewModel._movieList.value = movieList
+            if(!resultsMovies.movieList.isNullOrEmpty())
+                mMovieList.value = resultsMovies
+            else
+                mError.value = false
         }
     }
 

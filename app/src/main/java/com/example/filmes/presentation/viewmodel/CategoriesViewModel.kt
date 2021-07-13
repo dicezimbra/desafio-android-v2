@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.detalhes
+package com.example.filmes.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,17 +12,18 @@ import kotlinx.coroutines.withContext
 
 class CategoriesViewModel(private var categoriesUseCase: CategoriesUseCase):ViewModel() {
 
-    private val _resultsCategories = MutableLiveData<ResultsCategoriesDto>()
+    private val mCategories = MutableLiveData<ResultsCategoriesDto>()
 
     val categories:LiveData<ResultsCategoriesDto>
-        get() = _resultsCategories
+        get() = mCategories
 
     fun getCategories(){
         CoroutineScope(Dispatchers.Main).launch {
             var resultsCategories = withContext(Dispatchers.Default){
                 categoriesUseCase.invoke()
             }
-            _resultsCategories.value = resultsCategories
+            if(!resultsCategories.generosFilme.isNullOrEmpty())
+                mCategories.value = resultsCategories
         }
     }
 }

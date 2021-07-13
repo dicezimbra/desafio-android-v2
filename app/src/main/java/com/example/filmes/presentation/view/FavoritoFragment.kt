@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.favorito
+package com.example.filmes.presentation.view
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,15 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.presentation.detalhes.DetalhesActivity
-import com.example.filmes.presentation.adapter.FavoritoAdapter
-import com.example.filmes.presentation.adapter.OnItemClickFavoritoListener
-import com.example.filmes.presentation.SharedPreferencesViewModel
+import com.example.filmes.presentation.view.adapter.FavoritoAdapter
+import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
+import com.example.filmes.presentation.viewmodel.SharedPreferencesViewModel
 import com.example.filmes.domain.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.fragment_favorito.*
 
@@ -33,13 +31,12 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
     }
 
     private fun initView() {
         ConfigViewModel()
-        ConfigObserver()
+        getListaFilmes()
         refresh_favorite.setOnRefreshListener {
             preferencesViewModel.getListaSalva()
             refresh_favorite.isRefreshing = false
@@ -52,27 +49,26 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
             this,
             SharedPreferencesViewModel.ViewModelFactory(preferencesConfig)
         ).get(SharedPreferencesViewModel::class.java)
-
-        preferencesViewModel.getListaSalva()
     }
 
-    private fun ConfigObserver() {
-        preferencesViewModel.listaFilmes.observe(requireActivity(), Observer { listSalvo ->
+    private fun getListaFilmes() {
+        preferencesViewModel.getListaSalva()
+        preferencesViewModel.listaFilmes.observe(requireActivity()) { listSalvo ->
             if(listSalvo.isNotEmpty())
                 txt_none_favorite.visibility = View.GONE
             else
                 txt_none_favorite.visibility = View.VISIBLE
 
             listMovieSalvo = listSalvo
-            atualizarRecycler(listMovieSalvo)
-        })
+            updateAdapter(listMovieSalvo)
+        }
     }
 
     private fun sharedInstance() : SharedPreferences {
         return requireActivity().getSharedPreferences("com.example.filmes", AppCompatActivity.MODE_PRIVATE)
     }
 
-    private fun atualizarRecycler(listMovieSalvo : ArrayList<MovieDto>) {
+    private fun updateAdapter(listMovieSalvo : ArrayList<MovieDto>) {
         recyclerView_favorite.layoutManager = LinearLayoutManager(activity)
         recyclerView_favorite.adapter = FavoritoAdapter(this, listMovieSalvo)
     }
@@ -85,5 +81,6 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     override fun onClickButtonFavorito(movie: MovieDto) {
         preferencesViewModel.inserirListFavorito(movie, listMovieSalvo)
+        preferencesViewModel.getListaSalva()
     }
 }

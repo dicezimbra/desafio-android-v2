@@ -4,4 +4,7 @@ import org.koin.dsl.module
 
 val SharedModule = module {
 
+//    single {  }
+//
+//    viewModel { SharedPreferencesViewModel() }
 }
