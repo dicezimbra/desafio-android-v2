@@ -11,7 +11,7 @@ import com.example.filmes.R
 import com.example.filmes.data.api.RetrofitTask
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.viewmodel.SharedPreferencesViewModel
-import com.example.filmes.domain.SharedPreferecesConfig
+import com.example.filmes.domain.usecase.SharedPreferecesConfig
 import com.example.filmes.presentation.viewmodel.CategoriesViewModel
 import kotlinx.android.synthetic.main.activity_detalhes.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,18 +21,17 @@ import java.text.SimpleDateFormat
 class DetalhesActivity : AppCompatActivity() {
 
     private val categoriesViewModel: CategoriesViewModel by viewModel()
+    lateinit var preferencesViewModel: SharedPreferencesViewModel
     var listaSalva = ArrayList<MovieDto>()
     lateinit var movie: MovieDto
-    lateinit var preferencesViewModel: SharedPreferencesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhes)
 
-        var preferencesConfig = SharedPreferecesConfig(sharedInstance())
         preferencesViewModel = ViewModelProvider(
             this,
-            SharedPreferencesViewModel.ViewModelFactory(preferencesConfig)
+            SharedPreferencesViewModel.ViewModelFactory(sharedInstance())
         ).get(SharedPreferencesViewModel::class.java)
 
         initView()

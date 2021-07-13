@@ -1,5 +1,6 @@
 package com.example.filmes.presentation.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -67,7 +68,7 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
         startActivity(intent)
     }
 
-    fun searchMovie(name:String){
-//        movieViewModel.searchMovie(name+"")
+    fun searchMovie(name:String, view: Context){
+        Toast.makeText(view, name, Toast.LENGTH_SHORT).show()
     }
 }

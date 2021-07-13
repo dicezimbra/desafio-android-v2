@@ -1,13 +1,16 @@
 package com.example.filmes.presentation.viewmodel
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.domain.SharedPreferecesConfig
+import com.example.filmes.domain.usecase.SharedPreferecesConfig
 
-class SharedPreferencesViewModel(var preferecesConfig: SharedPreferecesConfig) :ViewModel(){
+class SharedPreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(){
+
+    private var preferecesConfig = SharedPreferecesConfig(sharedPreferences)
 
     private val mFavorito = MutableLiveData<Boolean>()
     private val mListaFilme = MutableLiveData<ArrayList<MovieDto>>()
@@ -50,10 +53,10 @@ class SharedPreferencesViewModel(var preferecesConfig: SharedPreferecesConfig) :
         }
     }
 
-    class ViewModelFactory(var preferecesConfig: SharedPreferecesConfig) :ViewModelProvider.Factory {
+    class ViewModelFactory(var sharedPreferences:SharedPreferences) :ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return modelClass.getConstructor(SharedPreferecesConfig::class.java)
-                .newInstance(preferecesConfig)
+            return modelClass.getConstructor(SharedPreferences::class.java)
+                .newInstance(sharedPreferences)
         }
     }
 }

@@ -15,13 +15,12 @@ import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.FavoritoAdapter
 import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
 import com.example.filmes.presentation.viewmodel.SharedPreferencesViewModel
-import com.example.filmes.domain.SharedPreferecesConfig
+import com.example.filmes.domain.usecase.SharedPreferecesConfig
 import kotlinx.android.synthetic.main.fragment_favorito.*
 
 class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     lateinit var listMovieSalvo:ArrayList<MovieDto>
-    lateinit var preferencesConfig: SharedPreferecesConfig
     lateinit var preferencesViewModel : SharedPreferencesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,10 +43,9 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
     }
 
     private fun ConfigViewModel() {
-        preferencesConfig = SharedPreferecesConfig(sharedInstance())
         preferencesViewModel = ViewModelProvider(
             this,
-            SharedPreferencesViewModel.ViewModelFactory(preferencesConfig)
+            SharedPreferencesViewModel.ViewModelFactory(sharedInstance())
         ).get(SharedPreferencesViewModel::class.java)
     }
 

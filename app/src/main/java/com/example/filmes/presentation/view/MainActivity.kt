@@ -59,7 +59,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                PopularFragment().searchMovie(newText+"")
+//                movieViewModel.getAllMovies()
+                PopularFragment().searchMovie(newText+"", this@MainActivity)
                 return true
             }
         })
