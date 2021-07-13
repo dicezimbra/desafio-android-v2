@@ -8,10 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.data.network.RetrofitTask
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.presentation.viewmodel.SharedPreferencesViewModel
-import com.example.filmes.domain.usecase.SharedPreferecesConfig
+import com.example.filmes.presentation.viewmodel.PreferencesViewModel
 import com.example.filmes.presentation.viewmodel.CategoriesViewModel
 import kotlinx.android.synthetic.main.activity_detalhes.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,18 +20,13 @@ import java.text.SimpleDateFormat
 class DetalhesActivity : AppCompatActivity() {
 
     private val categoriesViewModel: CategoriesViewModel by viewModel()
-    lateinit var preferencesViewModel: SharedPreferencesViewModel
+    private val preferencesViewModel: PreferencesViewModel by viewModel()
     var listaSalva = ArrayList<MovieDto>()
     lateinit var movie: MovieDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhes)
-
-        preferencesViewModel = ViewModelProvider(
-            this,
-            SharedPreferencesViewModel.ViewModelFactory(sharedInstance())
-        ).get(SharedPreferencesViewModel::class.java)
 
         initView()
     }
@@ -86,7 +80,7 @@ class DetalhesActivity : AppCompatActivity() {
         categoriesViewModel.categories.observe(this) { resultsCategories ->
             var genresList = resultsCategories.generosFilme
             var nomeCategorias = ""
-            //verifica os gêneros e coloca no TextView
+            //verifica os gêneros e coloca no TextView os nomes deles
             genresList.forEach { idGenero ->
                 movie.generosIds.forEach { idDoFilme ->
                     if(idGenero.id.equals(idDoFilme)){
@@ -96,10 +90,6 @@ class DetalhesActivity : AppCompatActivity() {
             }
             txt_movie_genre_details.text = nomeCategorias
         }
-    }
-
-    private fun sharedInstance() : SharedPreferences {
-        return getSharedPreferences("com.example.filmes", MODE_PRIVATE)
     }
 
     override fun onSupportNavigateUp(): Boolean {

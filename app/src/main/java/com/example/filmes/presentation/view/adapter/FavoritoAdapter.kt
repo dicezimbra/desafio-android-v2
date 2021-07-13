@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.data.network.RetrofitTask
 import com.example.filmes.domain.model.MovieDto
 import kotlinx.android.synthetic.main.favorite_item.view.*
 import java.text.SimpleDateFormat

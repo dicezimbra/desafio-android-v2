@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.SharedPreferecesConfig
 
-class SharedPreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(){
+class PreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(){
 
     private var preferecesConfig = SharedPreferecesConfig(sharedPreferences)
 

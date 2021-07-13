@@ -14,14 +14,15 @@ import com.example.filmes.R
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.FavoritoAdapter
 import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
-import com.example.filmes.presentation.viewmodel.SharedPreferencesViewModel
-import com.example.filmes.domain.usecase.SharedPreferecesConfig
+import com.example.filmes.presentation.viewmodel.PreferencesViewModel
 import kotlinx.android.synthetic.main.fragment_favorito.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     lateinit var listMovieSalvo:ArrayList<MovieDto>
-    lateinit var preferencesViewModel : SharedPreferencesViewModel
+    private val preferencesViewModel: PreferencesViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_favorito, container, false)
@@ -34,19 +35,11 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
     }
 
     private fun initView() {
-        ConfigViewModel()
         getListaFilmes()
         refresh_favorite.setOnRefreshListener {
             preferencesViewModel.getListaSalva()
             refresh_favorite.isRefreshing = false
         }
-    }
-
-    private fun ConfigViewModel() {
-        preferencesViewModel = ViewModelProvider(
-            this,
-            SharedPreferencesViewModel.ViewModelFactory(sharedInstance())
-        ).get(SharedPreferencesViewModel::class.java)
     }
 
     private fun getListaFilmes() {
@@ -63,7 +56,7 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
     }
 
     private fun sharedInstance() : SharedPreferences {
-        return requireActivity().getSharedPreferences("com.example.filmes", AppCompatActivity.MODE_PRIVATE)
+        return requireActivity().getSharedPreferences(R.string.KEY_PREFERENCES.toString(), AppCompatActivity.MODE_PRIVATE)
     }
 
     private fun updateAdapter(listMovieSalvo : ArrayList<MovieDto>) {

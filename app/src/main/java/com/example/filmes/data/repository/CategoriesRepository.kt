@@ -1,7 +1,7 @@
 package com.example.filmes.data.repository
 
 import android.util.Log
-import com.example.filmes.data.api.RetrofitTask
+import com.example.filmes.data.network.RetrofitTask
 import com.example.filmes.domain.model.ResultsCategoriesDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

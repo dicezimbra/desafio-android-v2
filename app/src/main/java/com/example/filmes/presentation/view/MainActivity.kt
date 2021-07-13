@@ -16,9 +16,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val movieViewModel: MovieViewModel by viewModel()
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,25 +43,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.attach()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        val search = menu!!.findItem(R.id.searchBar)
-        val searchView:SearchView = search.actionView as SearchView
-        searchView.queryHint = "Buscar movie"
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-//                movieViewModel.getAllMovies()
-                PopularFragment().searchMovie(newText+"", this@MainActivity)
-                return true
-            }
-        })
-
-        return super.onCreateOptionsMenu(menu)
     }
 }
