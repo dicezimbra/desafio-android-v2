@@ -1,15 +1,15 @@
 package com.example.filmes.domain.usecase
 
 import android.util.Log
-import com.example.filmes.data.repository.MovieRepository
+import com.example.filmes.data.repository.MovieImplementation
 import com.example.filmes.domain.model.ResultsMoviesDto
 
-class SearchUseCase(val movieRepository: MovieRepository) {
+class SearchUseCase(val movieImplementation: MovieImplementation) {
 
     private val TAG = "SearchUseCase"
 
     suspend operator fun invoke(nome:String): ResultsMoviesDto = try {
-        movieRepository.getSearchMovies(nome)
+        movieImplementation.getSearchMovies(nome)
     }catch (ex:Exception){
         Log.d(TAG, "Error: $ex")
         ResultsMoviesDto(arrayListOf(), Integer(0), Integer(0))

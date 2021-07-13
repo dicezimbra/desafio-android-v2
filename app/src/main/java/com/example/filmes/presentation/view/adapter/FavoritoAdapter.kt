@@ -31,7 +31,7 @@ class FavoritoAdapter(
             val realeseDate = formatDate.format(movie.dataLancamento)
 
             txt_movie_title_favorite.text = movie.tituloFilme
-            txt_release_date_favorite.text = realeseDate
+            txt_release_date_favorite.text = "Lançamento $realeseDate"
             txt_movie_description_favorite.text = movie.sinopse
 
             bnt_favorite.setOnClickListener { listener.onClickButtonFavorito(movie) }

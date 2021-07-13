@@ -31,7 +31,7 @@ class PopularAdapter(
             val realeseDate = formatDate.format(movie.dataLancamento)
 
             txt_movie_title_popular.text = movie.tituloFilme
-            txt_release_date_popular.text = realeseDate
+            txt_release_date_popular.text = "Lançamento $realeseDate"
             txt_movie_description_popular.text = movie.sinopse
 
         }

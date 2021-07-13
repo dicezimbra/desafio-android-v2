@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
@@ -14,12 +15,14 @@ import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.OnItemClickPopularListener
 import com.example.filmes.presentation.view.adapter.PopularAdapter
 import com.example.filmes.presentation.viewmodel.MovieViewModel
+import com.example.filmes.presentation.viewmodel.SeachViewModel
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() , OnItemClickPopularListener {
 
     private val movieViewModel: MovieViewModel by viewModel()
+    private val searchViewModel: SeachViewModel by viewModel()
     lateinit var movieList:ArrayList<MovieDto>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,6 +42,10 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
             movieViewModel.getAllMovies()
             refresh_popular.isRefreshing = false
         }
+
+        edt_search_popular.addTextChangedListener { movieName ->
+            if(movieName!!.length > 2) searchViewModel.searchMovie(movieName.toString())
+        }
     }
 
     fun getPopularMovies(){
@@ -48,11 +55,19 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
             updateAdapter(movieList)
             progressBar_popular.visibility = View.GONE
         }
+        searchViewModel.movieList.observe(requireActivity()){ resultsMovies ->
+            movieList = resultsMovies.movieList
+            updateAdapter(movieList)
+            progressBar_popular.visibility = View.GONE
+        }
     }
 
     private fun getErro() {
         movieViewModel.error.observe(requireActivity()) {
-            if(it == false) Toast.makeText(activity, "Erro de conexão", Toast.LENGTH_SHORT).show()
+            if(it == false) mostrarToast("Erro de conexão")
+        }
+        searchViewModel.error.observe(requireActivity()){
+            if(it == false) mostrarToast("Filme não encontrado")
         }
     }
 
@@ -68,7 +83,8 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
         startActivity(intent)
     }
 
-    fun searchMovie(name:String, view: Context){
-        Toast.makeText(view, name, Toast.LENGTH_SHORT).show()
+    private fun mostrarToast(toast: String) {
+        Toast.makeText(activity, toast, Toast.LENGTH_SHORT).show()
     }
+
 }

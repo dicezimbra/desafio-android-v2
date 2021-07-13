@@ -26,7 +26,7 @@ class SeachViewModel(private val searchUseCase: SearchUseCase) : ViewModel() {
             var resultsMovies = withContext(Dispatchers.Default) {
                 searchUseCase.invoke(nome)
             }
-            if(resultsMovies.movieList.isNullOrEmpty())
+            if(!resultsMovies.movieList.isNullOrEmpty())
                 mMovieList.value = resultsMovies
             else
                 mError.value = false

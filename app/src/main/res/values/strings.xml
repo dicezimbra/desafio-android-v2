@@ -13,4 +13,5 @@
     <string name="KEY_MOVIE">key_movie</string>
     <string name="error_conection">Erro de conexão com a rede</string>
     <string name="KEY_PREFERENCES">com.example.filmes</string>
+    <string name="search_name">Pesquisar pelo nome</string>
 </resources>

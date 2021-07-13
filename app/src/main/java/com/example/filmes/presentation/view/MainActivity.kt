@@ -20,11 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initView()
-    }
-
-    private fun initView() {
-        setSupportActionBar(toolbar_main)
         setupTabLayout()
     }
 
