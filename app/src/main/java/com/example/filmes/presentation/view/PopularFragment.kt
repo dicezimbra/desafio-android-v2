@@ -48,8 +48,8 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
 
     fun getPopularMovies(){
         movieViewModel.getAllMovies(null)
-        movieViewModel.movieList.observe(requireActivity()) { resultsMovies ->
-            movieList = resultsMovies.movieList
+        movieViewModel.movieList.observe(requireActivity()) { listaFilmes ->
+            movieList = listaFilmes
             updateAdapter(movieList)
             progressBar_popular.visibility = View.GONE
         }

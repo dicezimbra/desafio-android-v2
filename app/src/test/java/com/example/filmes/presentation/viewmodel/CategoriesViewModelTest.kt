@@ -25,7 +25,7 @@ class CategoriesViewModelTest{
     @get:Rule
     val rule = InstantTaskExecutorRule()
     val categoriesUse = mockk<CategoriesUseCase>()
-    val categoriesObserver = mockk<Observer<String>>()
+    val categoriesLiveData = mockk<Observer<String>>()
     private val mainThreadSurrogate = TestCoroutineDispatcher()
 
     @Before
@@ -35,7 +35,7 @@ class CategoriesViewModelTest{
 
     @After
     fun tearDown() {
-        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
+        Dispatchers.resetMain()
         mainThreadSurrogate.cleanupTestCoroutines()
     }
 
@@ -53,7 +53,7 @@ class CategoriesViewModelTest{
 
         coVerifyOrder {
             categoriesUse.invoke()
-            categoriesObserver.onChanged("romance, animação, ")
+            categoriesLiveData.onChanged("romance, animação, ")
         }
     }
 
@@ -67,15 +67,12 @@ class CategoriesViewModelTest{
 
         viewModel.getCategories(filme)
 
-        coVerifyOrder {
-            categoriesUse.invoke()
-            categoriesObserver.onChanged("Sem conexão")
-        }
+        coVerify { categoriesLiveData.onChanged("Sem conexão") }
     }
 
     private fun viewModelInstance():CategoriesViewModel{
         val viewModel = CategoriesViewModel(categoriesUse)
-        viewModel.categories.observeForever(categoriesObserver)
+        viewModel.categories.observeForever(categoriesLiveData)
         return viewModel
     }
 
