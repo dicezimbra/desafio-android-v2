@@ -3,9 +3,9 @@ package com.example.filmes.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.domain.model.ResultsCategoriesDto
 import com.example.filmes.domain.usecase.CategoriesUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ class CategoriesViewModel(private var categoriesUseCase: CategoriesUseCase):View
         get() = mCategories
 
     fun getCategories(movie:MovieDto){
-        CoroutineScope(Dispatchers.Main).launch {
+        viewModelScope.launch{
             var resultsCategories = withContext(Dispatchers.Default){
                 categoriesUseCase.invoke()
             }
@@ -33,7 +33,6 @@ class CategoriesViewModel(private var categoriesUseCase: CategoriesUseCase):View
             }
 
             mCategories.value = nomeCategorias
-
         }
     }
 

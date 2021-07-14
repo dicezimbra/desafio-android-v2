@@ -70,7 +70,7 @@ class MovieViewModelTest{
     }
 
     @Test
-    fun `Quando o getAllMovie trazer um resultsMovie com lista vazia de filmes e parametro dela nao for null valor de erroLiveData sera true`(){
+    fun `Quando o getAllMovie trazer um resultsMovie com lista vazia de filmes e parametro deve se null valor de erroLiveData sera true`(){
         val viewModel = viewModelInstance()
         val resultsMovie = ResultsMoviesDto(arrayListOf(), 0,0)
         coEvery { movieUse.invoke(null) } returns resultsMovie

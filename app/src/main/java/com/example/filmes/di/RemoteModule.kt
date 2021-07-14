@@ -1,10 +1,10 @@
 package com.example.filmes.di
 
-import com.example.filmes.data.network.RetrofitTask
-import com.example.filmes.data.repository.CategoriesImplementation
-import com.example.filmes.data.repository.CategoriesRepository
-import com.example.filmes.data.repository.MovieImplementation
-import com.example.filmes.data.repository.MovieRepository
+import com.example.filmes.data.remote.network.RetrofitTask
+import com.example.filmes.data.remote.repository.CategoriesImplementation
+import com.example.filmes.data.remote.repository.CategoriesRepository
+import com.example.filmes.data.remote.repository.MovieImplementation
+import com.example.filmes.data.remote.repository.MovieRepository
 import com.example.filmes.domain.usecase.CategoriesUseCase
 import com.example.filmes.domain.usecase.MovieUseCase
 import com.example.filmes.domain.usecase.SharedPreferecesConfig
@@ -24,7 +24,7 @@ val categoriesModule = module {
 val appModule = module {
     single { RetrofitTask() }
     single { MovieUseCase(MovieImplementation(get()) as MovieRepository) }
-    single { MovieImplementation(retrofitTask = get())}
+    single { MovieImplementation(retrofitTask = get()) }
 
     single { CategoriesUseCase(CategoriesImplementation(get()) as CategoriesRepository) }
     single { SharedPreferecesConfig(sharedPreferences = get()) }

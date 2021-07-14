@@ -1,8 +1,8 @@
-package com.example.filmes.data.repository
+package com.example.filmes.data.remote.repository
 
 import android.util.Log
 import com.example.filmes.utilis.TAG_CATEGORIES
-import com.example.filmes.data.network.RetrofitTask
+import com.example.filmes.data.remote.network.RetrofitTask
 import com.example.filmes.domain.model.ResultsCategoriesDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
