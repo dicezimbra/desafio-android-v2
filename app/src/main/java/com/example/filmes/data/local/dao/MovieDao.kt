@@ -19,8 +19,8 @@ interface MovieDao {
     fun verificarFilme(id: Long):Boolean
 
     @Query("SELECT * FROM movie")
-    fun getAllMovie():LiveData<List<MovieEntity>>
+    fun getAllMovie(): List<MovieEntity>
 
-    @Query("SELECT * FROM movie WHERE tituloFilme=:titulo")
-    fun getSearchName(titulo: String):LiveData<List<MovieEntity>>
+    @Query("SELECT * FROM movie WHERE tituloFilme LIKE '%' || :titulo || '%'")
+    fun getSearchName(titulo: String): List<MovieEntity>
 }

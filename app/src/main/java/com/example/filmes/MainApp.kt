@@ -19,10 +19,8 @@ class MainApp  : Application(){
                 listOf(
                     appModule,
                     movieModule,
-                    categoriesModule,
-                    preferencesModule,
                     daoModule,
-                    appDaoModule
+                    appDaoModule,
                 )
             )
         }

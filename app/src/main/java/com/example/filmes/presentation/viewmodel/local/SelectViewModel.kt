@@ -1,5 +1,6 @@
 package com.example.filmes.presentation.viewmodel.local
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.domain.model.MovieDto
@@ -9,31 +10,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SelectMovieViewModel(
+class SelectViewModel(
     private val selectMovieUseCase: SelectMovieUseCase
 ) : ViewModel() {
 
-    private val mLista = MutableLiveData<List<MovieEntity>>()
+    private val mListaSalva = MutableLiveData<List<MovieEntity>>()
 
-    val lista = selectMovieUseCase.invoke()
-
+    val listaSalva:LiveData<List<MovieEntity>>
+        get() = mListaSalva
 
     fun getSeachMovie(nome:String?){
         viewModelScope.launch {
-            val listaEntity = withContext(Dispatchers.Default){
-                selectMovieUseCase.invoke()
+            val lista = withContext(Dispatchers.Default){
+                try {
+                    selectMovieUseCase.invoke(nome)
+                }catch (ex:Exception){
+                    Log.d("TAG", "getSeachMovie: $ex")
+                    listOf()
+                }
             }
-
-
+            mListaSalva.value = lista
         }
     }
-
-
-    class ViewModelFactory(val selectMovieUseCase: SelectMovieUseCase) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return modelClass.getConstructor(SelectMovieUseCase::class.java)
-                .newInstance(selectMovieUseCase)
-        }
-    }
-
 }

@@ -4,7 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.model.ResultsMoviesDto
-import com.example.filmes.domain.usecase.MovieUseCase
+import com.example.filmes.domain.usecase.remote.MovieUseCase
+import com.example.filmes.presentation.viewmodel.remote.MovieViewModel
 import io.mockk.coEvery
 import io.mockk.coVerifyOrder
 import io.mockk.mockk

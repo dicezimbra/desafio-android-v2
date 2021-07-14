@@ -40,11 +40,11 @@ class MovieDataSource(
         return movieDao.verificarFilme(id)
     }
 
-    override fun getAllMovie(): LiveData<List<MovieEntity>> {
+    override fun getAllMovie(): List<MovieEntity> {
         return movieDao.getAllMovie()
     }
 
-    override fun getSearchName(titulo: String): LiveData<List<MovieEntity>> {
+    override fun getSearchName(titulo: String): List<MovieEntity> {
         return movieDao.getSearchName(titulo)
     }
 }

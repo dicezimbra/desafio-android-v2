@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
+import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.utilis.BASE_IMAGEM
-import com.example.filmes.domain.model.MovieDto
 import kotlinx.android.synthetic.main.favorite_item.view.*
-import java.text.SimpleDateFormat
 
 class FavoritoAdapter(
     var listener: OnItemClickFavoritoListener,
-    var movieList: ArrayList<MovieDto>
+    var movieList: List<MovieEntity>
 ) : RecyclerView.Adapter<FavoritoAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
@@ -29,14 +28,14 @@ class FavoritoAdapter(
                 .load(imageUrl)
                 .into(img_movie_favorite)
 
-            val formatDate = SimpleDateFormat("dd/MM/yyyy")
-            val realeseDate = formatDate.format(movie.dataLancamento)
+//            val formatDate = SimpleDateFormat("yy/MM/dd")
+//            val realeseDate = formatDate.format(movie.dataLancamento)
 
             txt_movie_title_favorite.text = movie.tituloFilme
-            txt_release_date_favorite.text = "Lançamento $realeseDate"
+//            txt_release_date_favorite.text = "Lançamento $realeseDate"
             txt_movie_description_favorite.text = movie.sinopse
 
-            bnt_favorite.setOnClickListener { listener.onClickButtonFavorito(movie) }
+            bnt_favorite.setOnClickListener { listener.onClickButton(movie) }
         }
     }
 
@@ -51,5 +50,5 @@ class FavoritoAdapter(
 interface OnItemClickFavoritoListener {
     fun onClick(position : Int)
 
-    fun onClickButtonFavorito(movie: MovieDto)
+    fun onClickButton(movie: MovieEntity)
 }

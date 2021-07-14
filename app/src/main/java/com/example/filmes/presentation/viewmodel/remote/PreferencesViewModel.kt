@@ -1,14 +1,11 @@
-package com.example.filmes.presentation.viewmodel
+package com.example.filmes.presentation.viewmodel.remote
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.domain.usecase.SharedPreferecesConfig
 
-class PreferencesViewModel(val preferecesConfig:SharedPreferecesConfig) :ViewModel(){
+class PreferencesViewModel() :ViewModel(){
 
     private val mFavorito = MutableLiveData<Boolean>()
     private val mListaFilme = MutableLiveData<ArrayList<MovieDto>>()
@@ -25,17 +22,17 @@ class PreferencesViewModel(val preferecesConfig:SharedPreferecesConfig) :ViewMod
         verificar(listaSalva, movie)
         if(foiSalvo) listaSalva.removeAt(posicaoDaLista)
         else listaSalva.add(movie)
-        preferecesConfig.setListaSalva(listaSalva)
+//        preferecesConfig.setListaSalva(listaSalva)
     }
 
     fun verificarFavorito(movie: MovieDto, listFilmesSalvo:ArrayList<MovieDto>){
         verificar(listFilmesSalvo, movie)
         mFavorito.value = foiSalvo
-        preferecesConfig.setListaSalva(listFilmesSalvo)
+//        preferecesConfig.setListaSalva(listFilmesSalvo)
     }
 
     fun getListaSalva(){
-        mListaFilme.value = preferecesConfig.getListaSalva()
+//        mListaFilme.value = preferecesConfig.getListaSalva()
     }
 
     private fun verificar(listFilmesSalvo: ArrayList<MovieDto>, movie: MovieDto){

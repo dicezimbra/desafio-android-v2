@@ -12,7 +12,7 @@ interface MovieLocalRepository {
 
     suspend fun verificarFilme(id: Long): Boolean
 
-    fun getAllMovie(): LiveData<List<MovieEntity>>
+    fun getAllMovie(): List<MovieEntity>
 
-    fun getSearchName(titulo: String): LiveData<List<MovieEntity>>
+    fun getSearchName(titulo: String): List<MovieEntity>
 }

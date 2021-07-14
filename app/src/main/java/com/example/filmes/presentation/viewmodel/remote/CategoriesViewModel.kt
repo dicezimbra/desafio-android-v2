@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.viewmodel
+package com.example.filmes.presentation.viewmodel.remote
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.domain.usecase.CategoriesUseCase
-import kotlinx.coroutines.CoroutineScope
+import com.example.filmes.domain.usecase.remote.CategoriesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

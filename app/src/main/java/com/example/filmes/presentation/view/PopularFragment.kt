@@ -13,7 +13,7 @@ import com.example.filmes.R
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.OnItemClickPopularListener
 import com.example.filmes.presentation.view.adapter.PopularAdapter
-import com.example.filmes.presentation.viewmodel.MovieViewModel
+import com.example.filmes.presentation.viewmodel.remote.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -5,13 +5,14 @@ import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.local.InsertMovieUseCase
 import kotlinx.coroutines.launch
 
-class InsertMovieViewModel(
+class InsertViewModel(
     private val insertMovieUseCase: InsertMovieUseCase
 ) :ViewModel(){
 
     private val mMensagem = MutableLiveData<String>()
     val mensagem:LiveData<String>
         get() = mMensagem
+
 
     fun insertMovie(movie: MovieDto){
         viewModelScope.launch {

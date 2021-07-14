@@ -1,4 +1,4 @@
-package com.example.filmes.domain.usecase
+package com.example.filmes.domain.usecase.remote
 
 import android.util.Log
 import com.example.filmes.utilis.TAG_CATEGORIES

@@ -5,7 +5,8 @@ import androidx.lifecycle.Observer
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.model.ResultsCategoriesDto
-import com.example.filmes.domain.usecase.CategoriesUseCase
+import com.example.filmes.domain.usecase.remote.CategoriesUseCase
+import com.example.filmes.presentation.viewmodel.remote.CategoriesViewModel
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -70,7 +71,7 @@ class CategoriesViewModelTest{
         coVerify { categoriesLiveData.onChanged("Sem conexão") }
     }
 
-    private fun viewModelInstance():CategoriesViewModel{
+    private fun viewModelInstance(): CategoriesViewModel {
         val viewModel = CategoriesViewModel(categoriesUse)
         viewModel.categories.observeForever(categoriesLiveData)
         return viewModel

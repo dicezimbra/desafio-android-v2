@@ -29,7 +29,7 @@ data class MovieEntity(
 class MovieTypeConverter{
 
     @TypeConverter
-    fun fromList(json : String?) : IntArray {
+    fun fromIntArray(json : String?) : IntArray {
         val turnsType = object : TypeToken<IntArray>() {}.type
         return Gson().fromJson(json, turnsType)
     }

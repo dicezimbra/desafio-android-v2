@@ -5,17 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.local.AppDatabase
-import com.example.filmes.data.local.repository.MovieDataSource
 import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
-import com.example.filmes.domain.usecase.local.InsertMovieImplementation
-import com.example.filmes.presentation.viewmodel.PreferencesViewModel
-import com.example.filmes.presentation.viewmodel.CategoriesViewModel
-import com.example.filmes.presentation.viewmodel.local.InsertMovieViewModel
+import com.example.filmes.presentation.viewmodel.remote.CategoriesViewModel
+import com.example.filmes.presentation.viewmodel.local.DeleteViewModel
+import com.example.filmes.presentation.viewmodel.local.InsertViewModel
+import com.example.filmes.presentation.viewmodel.local.VerificarViewModel
 import kotlinx.android.synthetic.main.activity_detalhes.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -23,11 +20,12 @@ import java.text.SimpleDateFormat
 
 class DetalhesActivity : AppCompatActivity() {
 
-    private val insertMovieViewModel:InsertMovieViewModel by viewModel()
+    private val insertViewModel:InsertViewModel by viewModel()
+    private val verificarMovieViewModel:VerificarViewModel by viewModel()
+    private val deleteMovieViewModel:DeleteViewModel by viewModel()
     private val categoriesViewModel: CategoriesViewModel by viewModel()
-    private val preferencesViewModel: PreferencesViewModel by viewModel()
-    var listaSalva = ArrayList<MovieDto>()
     lateinit var movie: MovieDto
+    var paraDeleta = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +37,23 @@ class DetalhesActivity : AppCompatActivity() {
     private fun initView() {
         setupActionBar()
         setupMovie()
-        getListaSalva()
-        insertMovieViewModel.mensagem.observe(this){
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
+        setupObservers()
         setupFavorito()
         setupCategories()
         floating_save_details.setOnClickListener {
-//            preferencesViewModel.inserirListFavorito(movie, listaSalva)
-//            preferencesViewModel.verificarFavorito(movie, listaSalva)
-//            preferencesViewModel.getListaSalva()
-            insertMovieViewModel.insertMovie(movie)
+            if(paraDeleta) deleteMovieViewModel.deleteMovie(movie.id)
+            else insertViewModel.insertMovie(movie)
+        }
+    }
+
+    private fun setupObservers() {
+        insertViewModel.mensagem.observe(this){
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            verificarMovieViewModel.procurar(movie.id)
+        }
+        deleteMovieViewModel.mensagem.observe(this){
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            verificarMovieViewModel.procurar(movie.id)
         }
     }
 
@@ -67,21 +71,16 @@ class DetalhesActivity : AppCompatActivity() {
         txt_movie_note_details.text = "${movie.notaMedia}/10 \nAvaliação"
         txt_movie_title_details.text = movie.tituloFilme
         txt_movie_description_details.text = movie.sinopse
-    }
 
-    private fun getListaSalva() {
-        preferencesViewModel.getListaSalva()
-        preferencesViewModel.listaFilmes.observe(this) { listaSalva ->
-            this.listaSalva = listaSalva
-            preferencesViewModel.verificarFavorito(movie, this.listaSalva)
-        }
+        verificarMovieViewModel.procurar(movie.id)
     }
 
     private fun setupFavorito() {
-        preferencesViewModel.favorito.observe(this) { foiSalvo ->
+        verificarMovieViewModel.verificado.observe(this){foiSalvo ->
             var imagemInt = if(foiSalvo) R.drawable.favorito
-                            else R.drawable.nao_favorito
+            else R.drawable.nao_favorito
 
+            this.paraDeleta = foiSalvo
             floating_save_details.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), imagemInt))
         }
     }
