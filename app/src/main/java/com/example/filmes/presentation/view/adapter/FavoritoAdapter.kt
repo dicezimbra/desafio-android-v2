@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.network.RetrofitTask
+import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
 import kotlinx.android.synthetic.main.favorite_item.view.*
 import java.text.SimpleDateFormat
@@ -24,8 +24,10 @@ class FavoritoAdapter(
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         var movie = movieList[position]
         with(holder.itemView){
-            var imageUrl = RetrofitTask.BASE_IMAGEM + movie.posterFilme
-            Glide.with(this).load(imageUrl).into(img_movie_favorite)
+            var imageUrl = BASE_IMAGEM + movie.posterFilme
+            Glide.with(this)
+                .load(imageUrl)
+                .into(img_movie_favorite)
 
             val formatDate = SimpleDateFormat("dd/MM/yyyy")
             val realeseDate = formatDate.format(movie.dataLancamento)
@@ -45,7 +47,6 @@ class FavoritoAdapter(
             itemView.setOnClickListener { listener.onClick(adapterPosition) }
         }
     }
-
 }
 interface OnItemClickFavoritoListener {
     fun onClick(position : Int)

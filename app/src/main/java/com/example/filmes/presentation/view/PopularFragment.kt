@@ -1,6 +1,5 @@
 package com.example.filmes.presentation.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,47 +14,41 @@ import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.OnItemClickPopularListener
 import com.example.filmes.presentation.view.adapter.PopularAdapter
 import com.example.filmes.presentation.viewmodel.MovieViewModel
-import com.example.filmes.presentation.viewmodel.SeachViewModel
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() , OnItemClickPopularListener {
 
     private val movieViewModel: MovieViewModel by viewModel()
-    private val searchViewModel: SeachViewModel by viewModel()
     lateinit var movieList:ArrayList<MovieDto>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_popular, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initView()
     }
 
     private fun initView() {
+        progressBar_popular.visibility = View.VISIBLE
         getPopularMovies()
         getErro()
-        progressBar_popular.visibility = View.VISIBLE
         refresh_popular.setOnRefreshListener {
-            movieViewModel.getAllMovies()
+            movieViewModel.getAllMovies(null)
             refresh_popular.isRefreshing = false
+            edt_search_popular.clearFocus()
         }
 
         edt_search_popular.addTextChangedListener { movieName ->
-            if(movieName!!.length > 2) searchViewModel.searchMovie(movieName.toString())
+            if(movieName!!.length > 2) movieViewModel.getAllMovies(movieName.toString())
         }
     }
 
     fun getPopularMovies(){
-        movieViewModel.getAllMovies()
+        movieViewModel.getAllMovies(null)
         movieViewModel.movieList.observe(requireActivity()) { resultsMovies ->
-            movieList = resultsMovies.movieList
-            updateAdapter(movieList)
-            progressBar_popular.visibility = View.GONE
-        }
-        searchViewModel.movieList.observe(requireActivity()){ resultsMovies ->
             movieList = resultsMovies.movieList
             updateAdapter(movieList)
             progressBar_popular.visibility = View.GONE
@@ -63,11 +56,10 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
     }
 
     private fun getErro() {
-        movieViewModel.error.observe(requireActivity()) {
-            if(it == false) mostrarToast("Erro de conexão")
-        }
-        searchViewModel.error.observe(requireActivity()){
-            if(it == false) mostrarToast("Filme não encontrado")
+        movieViewModel.error.observe(requireActivity()) { erro ->
+            //se for true o erro é de conexão
+            if(erro) mostrarToast("Erro de conexão")
+            else mostrarToast("Filme não encontrado")
         }
     }
 
@@ -77,14 +69,13 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
         recyclerView_popular.adapter = popularAdapter
     }
 
+    private fun mostrarToast(toast: String) {
+        Toast.makeText(activity, toast, Toast.LENGTH_LONG).show()
+    }
+
     override fun onClick(posicao: Int) {
         var intent = Intent(activity, DetalhesActivity::class.java)
         intent.putExtra(R.string.KEY_MOVIE.toString(), movieList[posicao])
         startActivity(intent)
     }
-
-    private fun mostrarToast(toast: String) {
-        Toast.makeText(activity, toast, Toast.LENGTH_SHORT).show()
-    }
-
 }

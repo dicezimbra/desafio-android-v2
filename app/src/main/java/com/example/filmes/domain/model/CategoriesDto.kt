@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 class CategoriesDto (
 
     @SerializedName("id")
-    var id :Integer,
+    var id :Int,
 
     @SerializedName("name")
     var nome :String

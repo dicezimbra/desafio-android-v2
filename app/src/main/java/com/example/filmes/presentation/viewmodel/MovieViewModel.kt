@@ -21,15 +21,14 @@ class MovieViewModel(private var movieUseCase: MovieUseCase) : ViewModel() {
     val error: LiveData<Boolean>
         get() = mError
 
-    fun getAllMovies(){
+    fun getAllMovies(name:String?){
         CoroutineScope(Dispatchers.Main).launch {
             var resultsMovies = withContext(Dispatchers.Default) {
-                    movieUseCase.invoke()
+                    movieUseCase.invoke(name)
                 }
             if(!resultsMovies.movieList.isNullOrEmpty())
                 mMovieList.value = resultsMovies
-            else
-                mError.value = false
+            else mError.value = name == null
         }
     }
 

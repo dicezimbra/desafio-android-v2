@@ -1,14 +1,12 @@
 package com.example.filmes.presentation.view
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.network.RetrofitTask
+import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.viewmodel.PreferencesViewModel
 import com.example.filmes.presentation.viewmodel.CategoriesViewModel
@@ -34,7 +32,8 @@ class DetalhesActivity : AppCompatActivity() {
     private fun initView() {
         setupActionBar()
         setupMovie()
-        setupViewModel()
+        getListaSalva()
+        setupFavorito()
         setupCategories()
         floating_save_details.setOnClickListener {
             preferencesViewModel.inserirListFavorito(movie, listaSalva)
@@ -50,7 +49,7 @@ class DetalhesActivity : AppCompatActivity() {
 
     private fun setupMovie() {
         movie = intent.getParcelableExtra(R.string.KEY_MOVIE.toString())!!
-        Glide.with(this).load(RetrofitTask.BASE_IMAGEM + movie.backdropPath).into(img_movie_details)
+        Glide.with(this).load(BASE_IMAGEM + movie.backdropPath).into(img_movie_details)
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
         val realeseDate = dateFormat.format(movie.dataLancamento)
         txt_movie_date_details.text = "Lançamento: $realeseDate"
@@ -59,36 +58,27 @@ class DetalhesActivity : AppCompatActivity() {
         txt_movie_description_details.text = movie.sinopse
     }
 
-    private fun setupViewModel() {
+    private fun getListaSalva() {
         preferencesViewModel.getListaSalva()
         preferencesViewModel.listaFilmes.observe(this) { listaSalva ->
             this.listaSalva = listaSalva
             preferencesViewModel.verificarFavorito(movie, this.listaSalva)
         }
+    }
+
+    private fun setupFavorito() {
         preferencesViewModel.favorito.observe(this) { foiSalvo ->
-            var imagemInt = if(foiSalvo){
-                R.drawable.favorito
-            }else{
-                R.drawable.nao_favorito
-            }
+            var imagemInt = if(foiSalvo) R.drawable.favorito
+                            else R.drawable.nao_favorito
+
             floating_save_details.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), imagemInt))
         }
     }
 
     private fun setupCategories(){
-        categoriesViewModel.getCategories()
-        categoriesViewModel.categories.observe(this) { resultsCategories ->
-            var genresList = resultsCategories.generosFilme
-            var nomeCategorias = ""
-            //verifica os gêneros e coloca no TextView os nomes deles
-            genresList.forEach { idGenero ->
-                movie.generosIds.forEach { idDoFilme ->
-                    if(idGenero.id.equals(idDoFilme)){
-                        nomeCategorias += idGenero.nome+", "
-                    }
-                }
-            }
-            txt_movie_genre_details.text = nomeCategorias
+        categoriesViewModel.getCategories(movie)
+        categoriesViewModel.categories.observe(this) { genres ->
+            txt_movie_genre_details.text = genres
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.filmes.data.network
 
-import com.example.filmes.data.model.MovieResponse
+import com.example.filmes.utilis.LANGUAGE
+import com.example.filmes.utilis.USER_KEY
 import com.example.filmes.domain.model.ResultsCategoriesDto
 import com.example.filmes.domain.model.ResultsMoviesDto
 import retrofit2.Response
@@ -11,22 +12,20 @@ interface MovieApi {
 
     @GET("movie/popular")
     suspend fun getAllPopularMovies(
-        @Query("api_key") keyApi:String = MovieResponse().keyApi,
-        @Query("language") language:String = MovieResponse().language
+        @Query("api_key") keyApi:String = USER_KEY,
+        @Query("language") language:String = LANGUAGE
     ) : Response<ResultsMoviesDto>
 
     @GET("search/movie")
     suspend fun getSearchName(
-        @Query("api_key") keyApi:String = MovieResponse().keyApi,
-        @Query("language") language:String = MovieResponse().language,
+        @Query("api_key") keyApi:String,
+        @Query("language") language:String,
         @Query("query") name:String,
     ) : Response<ResultsMoviesDto>
 
     @GET("genre/movie/list")
     suspend fun getAllCategories(
-        @Query("api_key") keyApi:String = MovieResponse().keyApi,
-        @Query("language") language:String = MovieResponse().language
+        @Query("api_key") keyApi:String = USER_KEY,
+        @Query("language") language:String = LANGUAGE
     ) : Response<ResultsCategoriesDto>
-
-
 }

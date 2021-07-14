@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmes.R
-import com.example.filmes.data.network.RetrofitTask
+import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
 import kotlinx.android.synthetic.main.popular_item.view.*
 import java.text.SimpleDateFormat
@@ -24,8 +24,10 @@ class PopularAdapter(
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         var movie = movieList[position]
         with(holder.itemView){
-            var imageUrl = RetrofitTask.BASE_IMAGEM + movie.posterFilme
-            Glide.with(this).load(imageUrl).into(img_movie_popular)
+            var imageUrl = BASE_IMAGEM + movie.posterFilme
+            Glide.with(this)
+                .load(imageUrl)
+                .into(img_movie_popular)
 
             val formatDate = SimpleDateFormat("dd/MM/yyyy")
             val realeseDate = formatDate.format(movie.dataLancamento)
@@ -33,7 +35,6 @@ class PopularAdapter(
             txt_movie_title_popular.text = movie.tituloFilme
             txt_release_date_popular.text = "Lançamento $realeseDate"
             txt_movie_description_popular.text = movie.sinopse
-
         }
     }
 
@@ -44,8 +45,6 @@ class PopularAdapter(
             itemView.setOnClickListener { listener.onClick(adapterPosition) }
         }
     }
-
-
 }
 interface OnItemClickPopularListener {
     fun onClick(position : Int)

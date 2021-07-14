@@ -15,7 +15,7 @@ class MainApp  : Application(){
         startKoin {
             androidLogger(Level.INFO)
             androidContext(this@MainApp)
-            modules(listOf(appModule, movieModule, categoriesModule, preferencesModule, searchModule))
+            modules(listOf(appModule, movieModule, categoriesModule, preferencesModule))
         }
     }
 }

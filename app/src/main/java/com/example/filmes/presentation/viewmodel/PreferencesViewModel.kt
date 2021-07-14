@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.SharedPreferecesConfig
 
-class PreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(){
-
-    private var preferecesConfig = SharedPreferecesConfig(sharedPreferences)
+class PreferencesViewModel(val preferecesConfig:SharedPreferecesConfig) :ViewModel(){
 
     private val mFavorito = MutableLiveData<Boolean>()
     private val mListaFilme = MutableLiveData<ArrayList<MovieDto>>()
@@ -25,11 +23,8 @@ class PreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(
 
     fun inserirListFavorito(movie: MovieDto, listaSalva:ArrayList<MovieDto>){
         verificar(listaSalva, movie)
-        if(foiSalvo)
-            listaSalva.removeAt(posicaoDaLista)
-        else
-            listaSalva.add(movie)
-
+        if(foiSalvo) listaSalva.removeAt(posicaoDaLista)
+        else listaSalva.add(movie)
         preferecesConfig.setListaSalva(listaSalva)
     }
 
@@ -50,13 +45,6 @@ class PreferencesViewModel(val sharedPreferences: SharedPreferences) :ViewModel(
                 foiSalvo = true
                 posicaoDaLista = posicao
             }
-        }
-    }
-
-    class ViewModelFactory(var sharedPreferences:SharedPreferences) :ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return modelClass.getConstructor(SharedPreferences::class.java)
-                .newInstance(sharedPreferences)
         }
     }
 }

@@ -25,8 +25,7 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
     private val preferencesViewModel: PreferencesViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_favorito, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_favorito, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,19 +43,15 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     private fun getListaFilmes() {
         preferencesViewModel.getListaSalva()
-        preferencesViewModel.listaFilmes.observe(requireActivity()) { listSalvo ->
-            if(listSalvo.isNotEmpty())
+        preferencesViewModel.listaFilmes.observe(requireActivity()) { listaSalvo ->
+            if(listaSalvo.isNotEmpty())
                 txt_none_favorite.visibility = View.GONE
             else
                 txt_none_favorite.visibility = View.VISIBLE
 
-            listMovieSalvo = listSalvo
+            listMovieSalvo = listaSalvo
             updateAdapter(listMovieSalvo)
         }
-    }
-
-    private fun sharedInstance() : SharedPreferences {
-        return requireActivity().getSharedPreferences(R.string.KEY_PREFERENCES.toString(), AppCompatActivity.MODE_PRIVATE)
     }
 
     private fun updateAdapter(listMovieSalvo : ArrayList<MovieDto>) {
