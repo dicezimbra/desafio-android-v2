@@ -2,14 +2,20 @@ package com.example.filmes.presentation.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.filmes.R
+import com.example.filmes.data.local.AppDatabase
+import com.example.filmes.data.local.repository.MovieDataSource
 import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
+import com.example.filmes.domain.usecase.local.InsertMovieImplementation
 import com.example.filmes.presentation.viewmodel.PreferencesViewModel
 import com.example.filmes.presentation.viewmodel.CategoriesViewModel
+import com.example.filmes.presentation.viewmodel.local.InsertMovieViewModel
 import kotlinx.android.synthetic.main.activity_detalhes.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -17,6 +23,7 @@ import java.text.SimpleDateFormat
 
 class DetalhesActivity : AppCompatActivity() {
 
+    private val insertMovieViewModel:InsertMovieViewModel by viewModel()
     private val categoriesViewModel: CategoriesViewModel by viewModel()
     private val preferencesViewModel: PreferencesViewModel by viewModel()
     var listaSalva = ArrayList<MovieDto>()
@@ -33,12 +40,16 @@ class DetalhesActivity : AppCompatActivity() {
         setupActionBar()
         setupMovie()
         getListaSalva()
+        insertMovieViewModel.mensagem.observe(this){
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
         setupFavorito()
         setupCategories()
         floating_save_details.setOnClickListener {
-            preferencesViewModel.inserirListFavorito(movie, listaSalva)
-            preferencesViewModel.verificarFavorito(movie, listaSalva)
-            preferencesViewModel.getListaSalva()
+//            preferencesViewModel.inserirListFavorito(movie, listaSalva)
+//            preferencesViewModel.verificarFavorito(movie, listaSalva)
+//            preferencesViewModel.getListaSalva()
+            insertMovieViewModel.insertMovie(movie)
         }
     }
 

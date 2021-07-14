@@ -22,10 +22,8 @@ class MovieImplementation(val retrofitTask: RetrofitTask) : MovieRepository {
 
     override suspend fun getSearchMovies(name:String): ResultsMoviesDto {
         return withContext(Dispatchers.Default){
-                var response = retrofitTask.getRetrofitTask().getSearchName(
-                    USER_KEY,
-                    LANGUAGE,
-                    name)
+                var response = retrofitTask.getRetrofitTask()
+                    .getSearchName( name = name)
                 verificarResponse(response)
         }
     }

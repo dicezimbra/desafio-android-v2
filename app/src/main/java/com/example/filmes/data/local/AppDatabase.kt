@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.filmes.data.local.dao.MovieDao
 import com.example.filmes.data.local.entity.MovieEntity
+import com.example.filmes.data.local.entity.MovieTypeConverter
 
 @Database(entities = [MovieEntity::class], version = 1)
+@TypeConverters(MovieTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val movieDAO: MovieDao

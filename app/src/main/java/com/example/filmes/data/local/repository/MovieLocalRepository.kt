@@ -2,10 +2,11 @@ package com.example.filmes.data.local.repository
 
 import androidx.lifecycle.LiveData
 import com.example.filmes.data.local.entity.MovieEntity
+import com.example.filmes.domain.model.MovieDto
 
 interface MovieLocalRepository {
 
-    suspend fun insertMovie(movieEntity: MovieEntity): Long
+    suspend fun insertMovie(movieDto: MovieDto): Long
 
     suspend fun deleteMovie(id: Long)
 

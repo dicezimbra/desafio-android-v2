@@ -18,9 +18,9 @@ interface MovieApi {
 
     @GET("search/movie")
     suspend fun getSearchName(
-        @Query("api_key") keyApi:String,
-        @Query("language") language:String,
-        @Query("query") name:String,
+        @Query("api_key") keyApi:String = USER_KEY,
+        @Query("language") language:String = LANGUAGE,
+        @Query("query") name:String
     ) : Response<ResultsMoviesDto>
 
     @GET("genre/movie/list")

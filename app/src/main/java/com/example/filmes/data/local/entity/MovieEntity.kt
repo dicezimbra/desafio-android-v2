@@ -1,24 +1,39 @@
 package com.example.filmes.data.local.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
+import androidx.room.TypeConverter
+import com.example.filmes.domain.model.MovieDto
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 @Entity(tableName = "movie")
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = false)
-    val id: Long,
-    val posterFilme: String,
-    val tituloFilme: String,
-    val sinopse: String,
-    val notaMedia: Double,
-    val dataLancamento: String,
-    val generosIds:Int = 1,
-    var adult: Boolean,
-    val backdropPath: String,
-    val originalLanguage: String,
-    val originalTitle: String,
-    val popularity: Double,
-    val video: Boolean,
-    val voteCount: Int
+    @PrimaryKey(autoGenerate = false) val id: Long,
+    @ColumnInfo val generosIds:String,
+    @ColumnInfo val posterFilme: String,
+    @ColumnInfo val tituloFilme: String,
+    @ColumnInfo val sinopse: String,
+    @ColumnInfo val notaMedia: Double,
+    @ColumnInfo val dataLancamento: String,
+    @ColumnInfo var adult: Boolean,
+    @ColumnInfo val backdropPath: String,
+    @ColumnInfo val originalLanguage: String,
+    @ColumnInfo val originalTitle: String,
+    @ColumnInfo val popularity: Double,
+    @ColumnInfo val video: Boolean,
+    @ColumnInfo val voteCount: Int
 )
+
+class MovieTypeConverter{
+
+    @TypeConverter
+    fun fromList(json : String?) : IntArray {
+        val turnsType = object : TypeToken<IntArray>() {}.type
+        return Gson().fromJson(json, turnsType)
+    }
+
+    @TypeConverter
+    fun fromJson(listaGeneros : IntArray) : String = Gson().toJson(listaGeneros)
+}
