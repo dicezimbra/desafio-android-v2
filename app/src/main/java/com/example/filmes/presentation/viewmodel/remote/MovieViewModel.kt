@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.filmes.domain.model.MovieDto
+import com.example.filmes.domain.usecase.remote.GetMovie
 import com.example.filmes.domain.usecase.remote.MovieUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MovieViewModel(private var movieUseCase: MovieUseCase) : ViewModel() {
+class MovieViewModel(private var getMovie: MovieUseCase) : ViewModel() {
 
     private val mMovieList = MutableLiveData<ArrayList<MovieDto>>()
     private val mError = MutableLiveData<Boolean>()
@@ -24,7 +25,7 @@ class MovieViewModel(private var movieUseCase: MovieUseCase) : ViewModel() {
     fun getAllMovies(name:String?){
         CoroutineScope(Dispatchers.Main).launch {
             var resultsMovies = withContext(Dispatchers.Default) {
-                    movieUseCase.invoke(name)
+                    getMovie.invoke(name)
                 }
             if(!resultsMovies.movieList.isNullOrEmpty())
                 mMovieList.value = resultsMovies.movieList

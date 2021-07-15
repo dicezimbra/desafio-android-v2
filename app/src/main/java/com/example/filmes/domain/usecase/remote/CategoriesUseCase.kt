@@ -5,12 +5,16 @@ import com.example.filmes.utilis.TAG_CATEGORIES
 import com.example.filmes.data.remote.repository.CategoriesRepository
 import com.example.filmes.domain.model.ResultsCategoriesDto
 
-class CategoriesUseCase(private var categoriesRepository: CategoriesRepository) {
+class GetCategories(private var categoriesRepository: CategoriesRepository) :CategoriesUseCase{
 
-    suspend operator fun invoke():ResultsCategoriesDto = try{
+    override suspend operator fun invoke():ResultsCategoriesDto = try{
         categoriesRepository.getAllCategorias()
     }catch (ex:Exception){
         Log.d(TAG_CATEGORIES, "categoriesUseCase: $ex")
         ResultsCategoriesDto(arrayListOf())
     }
+}
+
+interface CategoriesUseCase{
+    suspend operator fun invoke():ResultsCategoriesDto
 }

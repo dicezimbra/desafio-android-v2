@@ -4,8 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.model.ResultsMoviesDto
-import com.example.filmes.domain.usecase.remote.MovieUseCase
-import com.example.filmes.presentation.viewmodel.remote.MovieViewModel
+import com.example.filmes.domain.usecase.remote.GetMovie
 import io.mockk.coEvery
 import io.mockk.coVerifyOrder
 import io.mockk.mockk
@@ -25,7 +24,7 @@ import kotlin.collections.ArrayList
 class MovieViewModelTest{
     @get:Rule
     val rule = InstantTaskExecutorRule()
-    val movieUse = mockk<MovieUseCase>()
+    val movieUse = mockk<GetMovie>()
     val movieLiveData = mockk<Observer<ArrayList<MovieDto>>>()
     val erroLiveData = mockk<Observer<Boolean>>()
     private val mainThreadSurrogate = TestCoroutineDispatcher()

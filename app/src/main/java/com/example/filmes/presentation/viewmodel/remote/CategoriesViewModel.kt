@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.filmes.R
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.remote.CategoriesUseCase
+import com.example.filmes.domain.usecase.remote.GetCategories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

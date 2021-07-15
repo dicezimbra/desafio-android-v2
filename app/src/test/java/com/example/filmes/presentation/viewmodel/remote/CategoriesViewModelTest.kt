@@ -5,8 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.model.ResultsCategoriesDto
-import com.example.filmes.domain.usecase.remote.CategoriesUseCase
-import com.example.filmes.presentation.viewmodel.remote.CategoriesViewModel
+import com.example.filmes.domain.usecase.remote.GetCategories
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,7 +24,7 @@ class CategoriesViewModelTest{
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
-    val categoriesUse = mockk<CategoriesUseCase>()
+    val categoriesUse = mockk<GetCategories>()
     val categoriesLiveData = mockk<Observer<String>>()
     private val mainThreadSurrogate = TestCoroutineDispatcher()
 
