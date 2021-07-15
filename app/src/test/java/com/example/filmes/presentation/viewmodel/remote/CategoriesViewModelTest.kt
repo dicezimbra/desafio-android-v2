@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.viewmodel
+package com.example.filmes.presentation.viewmodel.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -56,19 +56,6 @@ class CategoriesViewModelTest{
             categoriesUse.invoke()
             categoriesLiveData.onChanged("romance, animação, ")
         }
-    }
-
-    @Test
-    fun `Quando for chamado o getCategories deve retornar uma String de sem conexao`(){
-        val viewModel = viewModelInstance()
-        val filme = mockFilme()
-        val ResultadoCategoria = ResultsCategoriesDto(arrayListOf())
-
-        coEvery { categoriesUse.invoke() } returns ResultadoCategoria
-
-        viewModel.getCategories(filme)
-
-        coVerify { categoriesLiveData.onChanged("Sem conexão") }
     }
 
     private fun viewModelInstance(): CategoriesViewModel {

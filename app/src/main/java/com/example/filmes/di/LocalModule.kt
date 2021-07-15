@@ -17,9 +17,7 @@ val daoModule = module {
     viewModel { VerificarViewModel(verificarMovieUseCase = get()) }
     viewModel { DeleteViewModel(deleteMovieUseCase = get()) }
     viewModel { SelectViewModel(selectMovieUseCase = get()) }
-}
 
-val appDaoModule = module {
     single { MovieDataSource(AppDatabase.getInstance(androidContext()).movieDAO) as MovieLocalRepository }
     single { InsertMovieImplementation(movieLocalRepository = get()) as InsertMovieUseCase}
     single { VerificarMovieImplementation(movieLocalRepository = get()) as VerificarMovieUseCase}

@@ -1,5 +1,6 @@
 package com.example.filmes.data.local.entity
 
+import android.provider.ContactsContract
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,6 +8,8 @@ import androidx.room.TypeConverter
 import com.example.filmes.domain.model.MovieDto
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.sql.Date
+import java.text.DateFormat
 
 @Entity(tableName = "movie")
 data class MovieEntity(
@@ -25,15 +28,3 @@ data class MovieEntity(
     @ColumnInfo val video: Boolean,
     @ColumnInfo val voteCount: Int
 )
-
-class MovieTypeConverter{
-
-    @TypeConverter
-    fun fromIntArray(json : String?) : IntArray {
-        val turnsType = object : TypeToken<IntArray>() {}.type
-        return Gson().fromJson(json, turnsType)
-    }
-
-    @TypeConverter
-    fun fromJson(listaGeneros : IntArray) : String = Gson().toJson(listaGeneros)
-}

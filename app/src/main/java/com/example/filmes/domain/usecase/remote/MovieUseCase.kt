@@ -2,7 +2,6 @@ package com.example.filmes.domain.usecase.remote
 
 import android.util.Log
 import com.example.filmes.utilis.TAG_MOVIE
-import com.example.filmes.data.remote.repository.MovieImplementation
 import com.example.filmes.data.remote.repository.MovieRepository
 import com.example.filmes.domain.model.ResultsMoviesDto
 

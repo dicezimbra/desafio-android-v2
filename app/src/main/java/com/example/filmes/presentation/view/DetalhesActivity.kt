@@ -26,6 +26,7 @@ class DetalhesActivity : AppCompatActivity() {
     private val categoriesViewModel: CategoriesViewModel by viewModel()
     lateinit var movie: MovieDto
     var paraDeleta = false
+    var realeseDate = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,23 +38,13 @@ class DetalhesActivity : AppCompatActivity() {
     private fun initView() {
         setupActionBar()
         setupMovie()
-        setupObservers()
         setupFavorito()
         setupCategories()
         floating_save_details.setOnClickListener {
             if(paraDeleta) deleteMovieViewModel.deleteMovie(movie.id)
-            else insertViewModel.insertMovie(movie)
-        }
-    }
+            else insertViewModel.insertMovie(movie, realeseDate)
 
-    private fun setupObservers() {
-        insertViewModel.mensagem.observe(this){
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            verificarMovieViewModel.procurar(movie.id)
-        }
-        deleteMovieViewModel.mensagem.observe(this){
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            verificarMovieViewModel.procurar(movie.id)
+            verificarMovieViewModel.verificar(movie.id)
         }
     }
 
@@ -64,15 +55,19 @@ class DetalhesActivity : AppCompatActivity() {
 
     private fun setupMovie() {
         movie = intent.getParcelableExtra(R.string.KEY_MOVIE.toString())!!
-        Glide.with(this).load(BASE_IMAGEM + movie.backdropPath).into(img_movie_details)
+        verificarMovieViewModel.verificar(movie.id)
+        var dataString = intent.getStringExtra("data_string")
+        Glide.with(this).load(BASE_IMAGEM + movie.backdropPath+"").into(img_movie_details)
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-        val realeseDate = dateFormat.format(movie.dataLancamento)
-        txt_movie_date_details.text = "Lançamento: $realeseDate"
+        realeseDate = dateFormat.format(movie.dataLancamento)
         txt_movie_note_details.text = "${movie.notaMedia}/10 \nAvaliação"
         txt_movie_title_details.text = movie.tituloFilme
         txt_movie_description_details.text = movie.sinopse
 
-        verificarMovieViewModel.procurar(movie.id)
+        //estava com dificuldade de transformar a data em Date, porque o atributo estava vindo do SQLite em extenso
+        //em tão fiz dessa forma para conseguir
+        if (dataString == null) txt_movie_date_details.text = "Lançamento: $realeseDate"
+        else txt_movie_date_details.text = dataString
     }
 
     private fun setupFavorito() {

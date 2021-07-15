@@ -11,5 +11,5 @@ class RetrofitTask {
         .build()
 
 
-    fun getRetrofitTask() = retrofitInstance().create(MovieApi::class.java)
+    fun getRetrofitTask() = retrofitInstance().create(ApiService::class.java)
 }

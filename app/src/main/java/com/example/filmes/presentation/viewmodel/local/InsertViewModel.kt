@@ -1,27 +1,25 @@
 package com.example.filmes.presentation.viewmodel.local
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.filmes.R
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.local.InsertMovieUseCase
+import com.example.filmes.utilis.TAG_INSERT
 import kotlinx.coroutines.launch
 
 class InsertViewModel(
     private val insertMovieUseCase: InsertMovieUseCase
 ) :ViewModel(){
 
-    private val mMensagem = MutableLiveData<String>()
-    val mensagem:LiveData<String>
-        get() = mMensagem
-
-
-    fun insertMovie(movie: MovieDto){
+    fun insertMovie(movie: MovieDto, data:String){
         viewModelScope.launch {
-            val insert = insertMovieUseCase.invoke(movie)
+            try{
+                insertMovieUseCase.invoke(movie, data)
+            }catch (ex:Exception){
+                Log.d(TAG_INSERT, "insertMovie: $ex")
+            }
 
-            if(insert == movie.id.toLong())
-                mMensagem.value = "Cadastrado com Sucesso"
-            else
-                mMensagem.value = "Falha ao cadastrar"
         }
     }
 }

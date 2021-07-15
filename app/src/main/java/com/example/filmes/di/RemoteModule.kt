@@ -15,12 +15,9 @@ import org.koin.dsl.module
 val movieModule = module {
     viewModel { MovieViewModel(movieUseCase = get()) }
     viewModel { CategoriesViewModel(categoriesUseCase = get()) }
-}
 
-val appModule = module {
     single { RetrofitTask() }
     single { MovieUseCase(MovieImplementation(get()) as MovieRepository) }
     single { MovieImplementation(retrofitTask = get()) }
-
     single { CategoriesUseCase(CategoriesImplementation(get()) as CategoriesRepository) }
 }

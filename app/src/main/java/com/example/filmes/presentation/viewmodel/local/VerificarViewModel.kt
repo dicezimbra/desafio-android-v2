@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.filmes.domain.usecase.local.SelectMovieUseCase
 import com.example.filmes.domain.usecase.local.VerificarMovieUseCase
+import com.example.filmes.utilis.TAG_VERIFY
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,12 +17,12 @@ class VerificarViewModel(
     val verificado: LiveData<Boolean>
         get() = mVerificado
 
-    fun procurar(id:Int) = viewModelScope.launch {
+    fun verificar(id:Int) = viewModelScope.launch {
         val valor = withContext(Dispatchers.Default){
             try{
                 verificarMovieUseCase.invoke(id)
             }catch (ex:Exception){
-                Log.d("TAG", "addContato: $ex")
+                Log.d(TAG_VERIFY, "addContato: $ex")
                 false
             }
         }

@@ -2,7 +2,7 @@ package com.example.filmes.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-class ResultsCategoriesDto (
+data class ResultsCategoriesDto (
 
     @SerializedName("genres")
     var generosFilme : ArrayList<CategoriesDto>

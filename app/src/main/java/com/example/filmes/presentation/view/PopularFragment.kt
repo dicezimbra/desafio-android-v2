@@ -37,12 +37,11 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
         getErro()
         refresh_popular.setOnRefreshListener {
             movieViewModel.getAllMovies(null)
-            refresh_popular.isRefreshing = false
             edt_search_popular.clearFocus()
+            refresh_popular.isRefreshing = false
         }
-
         edt_search_popular.addTextChangedListener { movieName ->
-            if(movieName!!.length > 2) movieViewModel.getAllMovies(movieName.toString())
+            movieViewModel.getAllMovies(movieName.toString())
         }
     }
 
@@ -59,7 +58,9 @@ class PopularFragment : Fragment() , OnItemClickPopularListener {
         movieViewModel.error.observe(requireActivity()) { erro ->
             //se for true o erro é de conexão
             if(erro) mostrarToast("Erro de conexão")
-            else mostrarToast("Filme não encontrado")
+            else if(edt_search_popular.length() > 1){
+                mostrarToast("Filme não encontrado")
+            }
         }
     }
 

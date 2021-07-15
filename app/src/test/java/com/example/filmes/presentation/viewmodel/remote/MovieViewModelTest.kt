@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.viewmodel
+package com.example.filmes.presentation.viewmodel.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer

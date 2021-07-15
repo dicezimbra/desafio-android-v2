@@ -17,10 +17,8 @@ class MainApp  : Application(){
             androidContext(this@MainApp)
             modules(
                 listOf(
-                    appModule,
                     movieModule,
                     daoModule,
-                    appDaoModule,
                 )
             )
         }

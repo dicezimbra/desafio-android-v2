@@ -7,7 +7,7 @@ import java.lang.reflect.Array
 import java.util.*
 
 @Parcelize
-class MovieDto(
+data class MovieDto(
 
     @SerializedName("poster_path")
     val posterFilme: String,

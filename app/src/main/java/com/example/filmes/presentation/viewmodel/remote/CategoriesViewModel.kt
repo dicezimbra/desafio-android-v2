@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.filmes.R
 import com.example.filmes.domain.model.CategoriesDto
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.remote.CategoriesUseCase
@@ -25,13 +26,13 @@ class CategoriesViewModel(private var categoriesUseCase: CategoriesUseCase):View
                 categoriesUseCase.invoke()
             }
             if(!resultsCategories.generosFilme.isNullOrEmpty()){
+                nomeCategorias = ""
                 var genresList = resultsCategories.generosFilme
                 verificarCategorias(genresList, movie)
-            } else{
-                nomeCategorias = "Sem conexão"
+                mCategories.value = nomeCategorias
+
             }
 
-            mCategories.value = nomeCategorias
         }
     }
 

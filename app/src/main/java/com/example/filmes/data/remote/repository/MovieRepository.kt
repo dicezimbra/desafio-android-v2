@@ -1,9 +1,7 @@
 package com.example.filmes.data.remote.repository
 
 import android.util.Log
-import com.example.filmes.utilis.LANGUAGE
 import com.example.filmes.utilis.TAG_MOVIE
-import com.example.filmes.utilis.USER_KEY
 import com.example.filmes.data.remote.network.RetrofitTask
 import com.example.filmes.domain.model.ResultsMoviesDto
 import kotlinx.coroutines.Dispatchers

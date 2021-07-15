@@ -6,17 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
 import com.example.filmes.data.local.entity.MovieEntity
-import com.example.filmes.data.local.entity.MovieTypeConverter
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.presentation.view.adapter.FavoritoAdapter
 import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
 import com.example.filmes.presentation.viewmodel.local.DeleteViewModel
 import com.example.filmes.presentation.viewmodel.local.SelectViewModel
+import com.example.filmes.utilis.JsonService
 import kotlinx.android.synthetic.main.fragment_favorito.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -68,27 +67,19 @@ class FavoritoFragment : Fragment() , OnItemClickFavoritoListener {
 
     override fun onClick(posicao: Int) {
         var entity = listMovieSalvo[posicao]
-        var generos = MovieTypeConverter().fromIntArray(entity.generosIds)
+        var generos = JsonService.fromIntArray(entity.generosIds)
         var movieDto = MovieDto(
-            id = entity.id.toInt(),
-            posterFilme = entity.posterFilme,
-            tituloFilme = entity.tituloFilme,
-            sinopse = entity.sinopse,
-            notaMedia = entity.notaMedia,
-            //depois arruma
-            dataLancamento = Date(),
-            adult = entity.adult,
-            backdropPath = entity.backdropPath,
-            originalLanguage = entity.originalLanguage,
-            originalTitle = entity.originalTitle,
-            popularity = entity.popularity,
-            video = entity.video,
-            voteCount = entity.voteCount,
-            generosIds = generos
+            id = entity.id.toInt(), posterFilme = entity.posterFilme, tituloFilme = entity.tituloFilme,
+            sinopse = entity.sinopse, notaMedia = entity.notaMedia,
+            adult = entity.adult, backdropPath = entity.backdropPath, originalLanguage = entity.originalLanguage,
+            originalTitle = entity.originalTitle, popularity = entity.popularity, video = entity.video ,
+            voteCount = entity.voteCount, generosIds = generos,
+            dataLancamento = Date()
         )
 
         var intent = Intent(activity, DetalhesActivity::class.java)
         intent.putExtra(R.string.KEY_MOVIE.toString(), movieDto)
+        intent.putExtra("data_string", entity.dataLancamento)
         startActivity(intent)
     }
 

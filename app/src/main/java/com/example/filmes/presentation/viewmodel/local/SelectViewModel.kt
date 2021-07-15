@@ -6,6 +6,7 @@ import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.domain.usecase.local.InsertMovieUseCase
 import com.example.filmes.domain.usecase.local.SelectMovieUseCase
+import com.example.filmes.utilis.TAG_SELECT
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,7 +26,7 @@ class SelectViewModel(
                 try {
                     selectMovieUseCase.invoke(nome)
                 }catch (ex:Exception){
-                    Log.d("TAG", "getSeachMovie: $ex")
+                    Log.d(TAG_SELECT, "getSeachMovie: $ex")
                     listOf()
                 }
             }
