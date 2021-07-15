@@ -12,10 +12,10 @@
     <string name="failed_save">Falha ao salvar</string>
     <string name="failed_delete">Falha ao deletar</string>
     <string name="movie_delete">Removido</string>
-
-    <!--    Keys-->
-    <string name="KEY_MOVIE">key_movie</string>
     <string name="error_conection">Sem conexão</string>
     <string name="KEY_PREFERENCES">com.example.filmes</string>
     <string name="search_name">Pesquisar pelo nome</string>
+
+    <string name="KEY_MOVIE">key_movie</string>
+
 </resources>

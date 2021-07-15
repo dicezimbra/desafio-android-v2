@@ -8,6 +8,5 @@ val TAG_MOVIE = "movie-popular"
 val TAG_CATEGORIES = "all-categories"
 
 val TAG_INSERT = "all-categories"
-val TAG_DELETE = "delete-movie"
 val TAG_SELECT = "select_movie"
 val TAG_VERIFY = "verify_movie"

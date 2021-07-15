@@ -3,7 +3,7 @@ package com.example.filmes.domain.usecase.local
 import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.data.local.repository.MovieLocalRepository
 
-class SelectMovieImplementation(
+class SelectMovieImpl(
     private val movieLocalRepository: MovieLocalRepository
 ) : SelectMovieUseCase {
     override operator fun invoke(nome: String?): List<MovieEntity> {

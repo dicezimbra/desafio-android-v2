@@ -1,4 +1,4 @@
-package com.example.filmes.presentation.view
+package com.example.filmes.presentation.view.favorite
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmes.R
 import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.domain.model.MovieDto
+import com.example.filmes.presentation.view.DetalhesActivity
 import com.example.filmes.presentation.view.adapter.FavoritoAdapter
 import com.example.filmes.presentation.view.adapter.OnItemClickFavoritoListener
 import com.example.filmes.presentation.viewmodel.local.DeleteViewModel

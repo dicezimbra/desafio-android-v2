@@ -1,6 +1,7 @@
 package com.example.filmes.data.remote.repository
 
 import android.util.Log
+import com.example.filmes.data.remote.network.ApiService
 import com.example.filmes.utilis.TAG_MOVIE
 import com.example.filmes.data.remote.network.RetrofitTask
 import com.example.filmes.domain.model.ResultsMoviesDto
@@ -8,11 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class MovieImplementation(val retrofitTask: RetrofitTask) : MovieRepository {
+class MovieImpl(val apiService: ApiService) : MovieRepository {
 
     override suspend fun getAllPopulars(): ResultsMoviesDto {
         return withContext(Dispatchers.Default){
-                var response = retrofitTask.getRetrofitTask().getAllPopularMovies()
+                var response = apiService.getAllPopularMovies()
             verificarResponse(response)
         }
 
@@ -20,8 +21,7 @@ class MovieImplementation(val retrofitTask: RetrofitTask) : MovieRepository {
 
     override suspend fun getSearchMovies(name:String): ResultsMoviesDto {
         return withContext(Dispatchers.Default){
-                var response = retrofitTask.getRetrofitTask()
-                    .getSearchName( name = name)
+                var response = apiService.getSearchName( name = name)
                 verificarResponse(response)
         }
     }

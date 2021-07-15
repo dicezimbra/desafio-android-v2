@@ -4,7 +4,6 @@ import com.example.filmes.data.local.dao.MovieDao
 import com.example.filmes.data.local.entity.MovieEntity
 import com.example.filmes.domain.model.MovieDto
 import com.example.filmes.utilis.JsonService
-import java.text.SimpleDateFormat
 
 class MovieDataSource(
     private var movieDao: MovieDao

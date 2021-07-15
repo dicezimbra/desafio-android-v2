@@ -1,9 +1,8 @@
-package com.example.filmes.presentation.view
+package com.example.filmes.presentation.view.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmes.R
-import com.example.filmes.presentation.view.adapter.ViewPageAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 

@@ -22,6 +22,7 @@ import kotlin.collections.ArrayList
 
 @ExperimentalCoroutinesApi
 class MovieViewModelTest{
+
     @get:Rule
     val rule = InstantTaskExecutorRule()
     val movieUse = mockk<GetMovie>()

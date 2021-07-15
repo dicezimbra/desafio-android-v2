@@ -3,7 +3,7 @@ package com.example.filmes.presentation.viewmodel.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.filmes.data.local.entity.MovieEntity
-import com.example.filmes.domain.usecase.local.SelectMovieImplementation
+import com.example.filmes.domain.usecase.local.SelectMovieImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -16,14 +16,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.util.*
 
 @ExperimentalCoroutinesApi
 class SelectViewModelTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
-    val selectUse = mockk<SelectMovieImplementation>()
+    val selectUse = mockk<SelectMovieImpl>()
     val listaSalvaLiveData = mockk<Observer<List<MovieEntity>>>()
     private val mainThreadSurrogate = TestCoroutineDispatcher()
 
@@ -47,7 +46,6 @@ class SelectViewModelTest {
         viewMovie.getSeachMovie("Harry Potter")
 
         coVerify { listaSalvaLiveData.onChanged(mockMovie) }
-
     }
 
     private fun listMovie(): List<MovieEntity> {

@@ -46,7 +46,6 @@ class CategoriesViewModelTest{
         val filme = mockFilme()
         val listaCategorias = mockCategorias()
         val ResultadoCategoria = ResultsCategoriesDto(listaCategorias)
-
         coEvery { categoriesUse.invoke() } returns ResultadoCategoria
 
         viewModel.getCategories(filme)

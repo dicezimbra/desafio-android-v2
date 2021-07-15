@@ -2,13 +2,13 @@ package com.example.filmes.presentation.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.filmes.R
 import com.example.filmes.utilis.BASE_IMAGEM
 import com.example.filmes.domain.model.MovieDto
+import com.example.filmes.presentation.view.main.MainActivity
 import com.example.filmes.presentation.viewmodel.remote.CategoriesViewModel
 import com.example.filmes.presentation.viewmodel.local.DeleteViewModel
 import com.example.filmes.presentation.viewmodel.local.InsertViewModel
@@ -41,6 +41,7 @@ class DetalhesActivity : AppCompatActivity() {
         setupFavorito()
         setupCategories()
         floating_save_details.setOnClickListener {
+            verificarMovieViewModel.verificar(movie.id)
             if(paraDeleta) deleteMovieViewModel.deleteMovie(movie.id)
             else insertViewModel.insertMovie(movie, realeseDate)
 
@@ -71,7 +72,7 @@ class DetalhesActivity : AppCompatActivity() {
     }
 
     private fun setupFavorito() {
-        verificarMovieViewModel.verificado.observe(this){foiSalvo ->
+        verificarMovieViewModel.verificado.observe(this) {foiSalvo ->
             var imagemInt = if(foiSalvo) R.drawable.favorito
             else R.drawable.nao_favorito
 
